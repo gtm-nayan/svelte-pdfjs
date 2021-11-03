@@ -1,0 +1,1 @@
+A crude implementation of a svelte pdf viewer component, reacts to changes in the URL, password, page number and zoom level. Partially SSR compatible. The internal library Pdf.js throws a warning when attempting it, can be fixed through vite-plugin-iso if being used in svelte kit.
