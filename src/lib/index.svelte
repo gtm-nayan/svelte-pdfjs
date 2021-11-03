@@ -17,6 +17,7 @@
 
 	let canvas: HTMLCanvasElement;
 	let textLayerDiv: HTMLDivElement;
+	let pageDiv: HTMLDivElement;
 
 	let pdfDoc;
 	let pdfLoadingTask;
@@ -39,12 +40,12 @@
 		let page = await doc.getPage(pageNum);
 		let viewport = page.getViewport({ scale: pageZoom });
 
-		canvas.width = Math.floor(viewport.width);
-		canvas.height = Math.floor(viewport.height);
+		canvas.width = viewport.width;
+		canvas.height = viewport.height;
 
 		let ctx = canvas.getContext('2d');
 
-		page.render({ viewport, canvasContext: ctx })
+		page.render({ viewport, canvasContext: ctx });
 	}
 
 	$: loadDoc(pdfUrl, pdfPassword)
@@ -53,7 +54,41 @@
 	$: renderPage(pdfDoc, pageNumber, zoomLevel).catch((err) => console.log(err));
 </script>
 
-<div>
+<div class="svpdf-page-wrapper" bind:this={pageDiv}>
 	<canvas bind:this={canvas} />
-	<div bind:this={textLayerDiv} />
+	<div bind:this={textLayerDiv} class="textLayer" />
 </div>
+
+<style>
+	.svpdf-page-wrapper {
+		position: relative;
+	}
+
+	canvas {
+		margin: 0;
+		display: block;
+	}
+
+	.textLayer {
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		overflow: hidden;
+		opacity: 0.2;
+		line-height: 1;
+	}
+
+	:global(.svpdf-page-wrapper .textLayer > div) {
+		color: transparent;
+		position: absolute;
+		white-space: pre;
+		cursor: text;
+		-webkit-transform-origin: 0% 0%;
+		-moz-transform-origin: 0% 0%;
+		-o-transform-origin: 0% 0%;
+		-ms-transform-origin: 0% 0%;
+		transform-origin: 0% 0%;
+	}
+</style>
