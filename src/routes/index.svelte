@@ -7,13 +7,18 @@
 	let zoom = 1;
 </script>
 
+<PdfViewer pdfUrl="https://quillpdfs.netlify.app/9700_s12_qp_12.pdf" pageNumber={1} zoomLevel={1} />
+
+<br />
+
 {#if showPdf}
-	<PdfViewer pdfUrl="https://quillpdfs.netlify.app/{doc_url}" pageNumber={page} zoomLevel={zoom}/>
+	<PdfViewer pdfUrl="https://quillpdfs.netlify.app/{doc_url}" pageNumber={page} zoomLevel={zoom} />
 {/if}
+
 <div>
 	<input type="checkbox" bind:checked={showPdf} />
 	<input type="number" min={1} max={6} bind:value={page} />
-	<input type="range" min={0.25} max={4} step={0.25} bind:value="{zoom}"/>
+	<input type="range" min={0.25} max={4} step={0.25} bind:value={zoom} />
 
 	<select bind:value={doc_url}>
 		<option>9700_s12_qp_11.pdf</option>

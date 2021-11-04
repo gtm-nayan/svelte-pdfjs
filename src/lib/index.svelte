@@ -1,7 +1,13 @@
 <script lang="ts" context="module">
 	import * as pdfJs from 'pdfjs-dist/build/pdf';
+	import { readable } from 'svelte/store';
+
 	pdfJs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfJs.version}/build/pdf.worker.min.js`;
-	let pdfWorker = new pdfJs.PDFWorker();
+	let pdfWorker = readable({}, (set) => {
+		const worker = new pdfJs.PDFWorker();
+		set(worker);
+		return () => worker.destroy();
+	});
 </script>
 
 <script lang="ts">
@@ -27,7 +33,7 @@
 		pdfLoadingTask?.destroy();
 		pdfLoadingTask = pdfJs.getDocument({
 			url,
-			worker: pdfWorker,
+			worker: $pdfWorker,
 			password
 		});
 		let doc = await pdfLoadingTask.promise;
@@ -46,7 +52,7 @@
 
 		let ctx = canvas.getContext('2d');
 
-		pageRenderTask?.cancel()
+		pageRenderTask?.cancel();
 		pageRenderTask = page.render({ viewport, canvasContext: ctx });
 		pageRenderTask.promise.catch(handleRenderError);
 	}
