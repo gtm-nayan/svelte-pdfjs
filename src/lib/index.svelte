@@ -6,6 +6,7 @@
 
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import handleRenderError from './_utils/handleRenderError';
 
 	const dispatch = createEventDispatcher<{ documentloaded: any }>();
 
@@ -47,11 +48,7 @@
 
 		pageRenderTask?.cancel()
 		pageRenderTask = page.render({ viewport, canvasContext: ctx });
-		pageRenderTask.promise.catch((e) => {
-			if (e.name != "RenderingCancelledException") {
-				console.log(e)
-			}
-		});
+		pageRenderTask.promise.catch(handleRenderError);
 	}
 
 	$: loadDoc(pdfUrl, pdfPassword)
