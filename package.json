@@ -1,5 +1,5 @@
 {
-  "name": "@gtm-nayan/svelte-pdf",
+  "name": "svelte-pdfjs",
   "version": "0.0.1",
   "scripts": {
     "dev": "svelte-kit dev",
