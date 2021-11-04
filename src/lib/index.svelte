@@ -1,19 +1,18 @@
-<script lang="ts">
+<script lang="ts" context="module">
 	import * as pdfJs from 'pdfjs-dist/build/pdf';
-	import { onDestroy, createEventDispatcher } from 'svelte';
+	pdfJs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfJs.version}/build/pdf.worker.min.js`;
+	let pdfWorker = new pdfJs.PDFWorker();
+</script>
+
+<script lang="ts">
+	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher<{ documentloaded: any }>();
 
 	export let pdfUrl: string;
 	export let zoomLevel: number = 1;
 	export let pageNumber: number = 1;
-	export let customWorkerSrc: string = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfJs.version}/build/pdf.worker.min.js`;
 	export let pdfPassword: string = undefined;
-
-	pdfJs.GlobalWorkerOptions.workerSrc = customWorkerSrc;
-	let pdfWorker = new pdfJs.PDFWorker();
-
-	onDestroy(() => pdfWorker.destroy());
 
 	let canvas: HTMLCanvasElement;
 	let textLayerDiv: HTMLDivElement;
@@ -21,6 +20,7 @@
 
 	let pdfDoc;
 	let pdfLoadingTask;
+	let pageRenderTask;
 
 	async function loadDoc(url: string, password: string) {
 		pdfLoadingTask?.destroy();
@@ -45,7 +45,13 @@
 
 		let ctx = canvas.getContext('2d');
 
-		page.render({ viewport, canvasContext: ctx });
+		pageRenderTask?.cancel()
+		pageRenderTask = page.render({ viewport, canvasContext: ctx });
+		pageRenderTask.promise.catch((e) => {
+			if (e.name != "RenderingCancelledException") {
+				console.log(e)
+			}
+		});
 	}
 
 	$: loadDoc(pdfUrl, pdfPassword)
