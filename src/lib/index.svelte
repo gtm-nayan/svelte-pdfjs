@@ -31,6 +31,7 @@
 
 	async function loadDoc(url: string, password: string) {
 		pdfLoadingTask?.destroy();
+		pdfDoc = null;
 		pdfLoadingTask = pdfJs.getDocument({
 			url,
 			worker: $pdfWorker,
