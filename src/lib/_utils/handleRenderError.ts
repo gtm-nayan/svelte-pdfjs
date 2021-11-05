@@ -1,5 +1,7 @@
+import { RenderingCancelledException } from "pdfjs-dist";
+
 export default function (e: Error) {
-	if (e.name != "RenderingCancelledException"){
+	if (e instanceof RenderingCancelledException){
 		console.error(e)
 	}
 }
