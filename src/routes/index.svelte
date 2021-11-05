@@ -3,26 +3,40 @@
 
 	let showPdf = true;
 	let page = 1;
-	let doc_url = '9700_s12_qp_12.pdf';
+	let doc_url = 'tackling-ts-preview-book.pdf';
 	let zoom = 1;
+	let max_pages = 1;
 </script>
-
-<PdfViewer pdfUrl="https://quillpdfs.netlify.app/9700_s12_qp_12.pdf" pageNumber={1} zoomLevel={1} />
 
 <br />
 
 {#if showPdf}
-	<PdfViewer pdfUrl="https://quillpdfs.netlify.app/{doc_url}" pageNumber={page} zoomLevel={zoom} />
+	<PdfViewer
+		pdfUrl="/{doc_url}"
+		pageNumber={page}
+		zoomLevel={zoom}
+		on:documentloaded={(e) => (max_pages = e.detail.numPages)}
+	/>
 {/if}
 
 <div>
 	<input type="checkbox" bind:checked={showPdf} />
-	<input type="number" min={1} max={6} bind:value={page} />
+	<input type="number" min={1} max={max_pages} bind:value={page} />
 	<input type="range" min={0.25} max={4} step={0.25} bind:value={zoom} />
 
 	<select bind:value={doc_url}>
-		<option>9700_s12_qp_11.pdf</option>
-		<option>9700_s12_qp_12.pdf</option>
-		<option>9700_s12_qp_13.pdf</option>
+		<option>impatient-js-preview-book.pdf</option>
+		<option>tackling-ts-preview-book.pdf</option>
 	</select>
+
+	<button
+		on:click={() => {
+			doc_url = 'impatient-js-preview-book.pdf';
+			page = 5;
+		}}
+	>
+		Test switching both page and url
+	</button>
 </div>
+<br />
+Demo PDFs sourced from https://exploringjs.com/
