@@ -1,5 +1,6 @@
 <script>
-	import PdfViewer from '$lib/index.svelte';
+	import PdfViewer from '$lib/index.svelte?client';
+	import { browser } from "$app/env";
 
 	let showPdf = true;
 	let page = 1;
@@ -10,7 +11,7 @@
 
 <br />
 
-{#if showPdf}
+{#if browser && showPdf}
 	<PdfViewer
 		pdfUrl="/{doc_url}"
 		pageNumber={page}

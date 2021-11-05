@@ -11,6 +11,7 @@
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
   },
   "devDependencies": {
+    "@sveltejs/adapter-netlify": "^1.0.0-next.35",
     "@sveltejs/kit": "next",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
@@ -28,7 +29,8 @@
   },
   "type": "module",
   "dependencies": {
-    "pdfjs-dist": "^2.10.377"
+    "pdfjs-dist": "^2.10.377",
+    "vite-plugin-iso-import": "^0.1.2"
   },
   "exports": {
     ".": "./index.svelte"
