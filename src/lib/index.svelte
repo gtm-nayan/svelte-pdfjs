@@ -13,8 +13,10 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import handleRenderError from './_utils/handleRenderError';
+	import type { OnProgressParameters, PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api';
 
-	const dispatch = createEventDispatcher<{ documentloaded: any }>();
+	const dispatch =
+		createEventDispatcher<{ documentloaded: PDFDocumentProxy; progress: OnProgressParameters }>();
 
 	export let pdfUrl: string;
 	export let zoomLevel: number = 1;
