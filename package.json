@@ -29,8 +29,7 @@
   },
   "type": "module",
   "dependencies": {
-    "pdfjs-dist": "^2.10.377",
-    "vite-plugin-iso-import": "^0.1.2"
+    "pdfjs-dist": "^2.10.377"
   },
   "exports": {
     ".": "./index.svelte"

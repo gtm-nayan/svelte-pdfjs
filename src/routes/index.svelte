@@ -1,6 +1,10 @@
 <script>
-	import PdfViewer from '$lib/index.svelte?client';
-	import { browser } from "$app/env";
+	import { onMount } from 'svelte';
+	let PdfViewer;
+
+	onMount(async () => {
+		PdfViewer = (await import('$lib/index.svelte')).default;
+	});
 
 	let showPdf = true;
 	let page = 1;
@@ -11,8 +15,9 @@
 
 <br />
 
-{#if browser && showPdf}
-	<PdfViewer
+{#if showPdf}
+	<svelte:component
+		this={PdfViewer}
 		pdfUrl="/{doc_url}"
 		pageNumber={page}
 		zoomLevel={zoom}
