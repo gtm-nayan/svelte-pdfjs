@@ -13,22 +13,26 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import handleRenderError from './_utils/handleRenderError';
-	import type { OnProgressParameters, PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api';
+	import type {
+		OnProgressParameters,
+		PDFDocumentLoadingTask,
+		PDFDocumentProxy
+	} from 'pdfjs-dist/types/src/display/api';
 
-	const dispatch =
-		createEventDispatcher<{ documentloaded: PDFDocumentProxy; progress: OnProgressParameters }>();
+	const dispatch = createEventDispatcher<{ documentloaded: PDFDocumentProxy }>();
 
 	export let pdfUrl: string;
 	export let zoomLevel: number = 1;
 	export let pageNumber: number = 1;
 	export let pdfPassword: string = undefined;
+	export let progressCallback: (progress: OnProgressParameters) => void = undefined;
 
 	let canvas: HTMLCanvasElement;
 	let textLayerDiv: HTMLDivElement;
 	let pageDiv: HTMLDivElement;
 
-	let pdfDoc;
-	let pdfLoadingTask;
+	let pdfDoc: PDFDocumentProxy;
+	let pdfLoadingTask: PDFDocumentLoadingTask;
 	let pageRenderTask;
 
 	async function loadDoc(url: string, password: string) {
@@ -39,6 +43,7 @@
 			worker: $pdfWorker,
 			password
 		});
+		pdfLoadingTask.onProgress = progressCallback;
 		let doc = await pdfLoadingTask.promise;
 		dispatch('documentloaded', doc);
 		return doc;

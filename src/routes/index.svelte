@@ -11,10 +11,15 @@
 	let doc_url = 'tackling-ts-preview-book.pdf';
 	let zoom = 1;
 	let max_pages = 1;
+	let loadprogress = 0;
 </script>
 
 <br />
 
+<progress max="100" value={loadprogress} style="width: 100%" />
+
+{loadprogress}%
+<br />
 {#if showPdf}
 	<svelte:component
 		this={PdfViewer}
@@ -22,6 +27,7 @@
 		pageNumber={page}
 		zoomLevel={zoom}
 		on:documentloaded={(e) => (max_pages = e.detail.numPages)}
+		progressCallback={({ loaded, total }) => (loadprogress = (loaded / total) * 100)}
 	/>
 {/if}
 
