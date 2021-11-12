@@ -1,10 +1,10 @@
 <script>
-	import { onMount } from 'svelte';
-	let PdfViewer;
-
-	onMount(async () => {
-		PdfViewer = (await import('$lib/index.svelte')).default;
-	});
+	import PdfViewer from "$lib/index.svelte";
+	// import { onMount } from 'svelte';
+	// let PdfViewer;
+	// onMount(async () => {
+	// 	PdfViewer = (await import('$lib/index.svelte')).default;
+	// });
 
 	let showPdf = true;
 	let page = 1;
@@ -21,8 +21,9 @@
 {loadprogress}%
 <br />
 {#if showPdf}
-	<svelte:component
-		this={PdfViewer}
+	<!-- <svelte:component
+		this={PdfViewer} -->
+	<PdfViewer
 		pdfUrl="/{doc_url}"
 		pageNumber={page}
 		zoomLevel={zoom}

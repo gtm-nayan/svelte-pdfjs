@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@sveltejs/adapter-netlify': ^1.0.0-next.35
+  '@sveltejs/adapter-node': ^1.0.0-next.55
   '@sveltejs/kit': next
   '@typescript-eslint/eslint-plugin': ^4.31.1
   '@typescript-eslint/parser': ^4.31.1
@@ -23,7 +24,8 @@ dependencies:
 
 devDependencies:
   '@sveltejs/adapter-netlify': 1.0.0-next.35
-  '@sveltejs/kit': 1.0.0-next.194_svelte@3.44.1
+  '@sveltejs/adapter-node': 1.0.0-next.55
+  '@sveltejs/kit': 1.0.0-next.196_svelte@3.44.1
   '@typescript-eslint/eslint-plugin': 4.33.0_cc617358c89d3f38c52462f6d809db4c
   '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.4.4
   eslint: 7.32.0
@@ -132,8 +134,15 @@ packages:
       esbuild: 0.13.12
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.194_svelte@3.44.1:
-    resolution: {integrity: sha512-xM6BKLZkfYUEy0JXwglhCqBF58S8K4Lt7K7TdLMirrO4gtnZlhg8yhMsG+dYM257Fq0ucS7d/72QgXJfnfURZA==}
+  /@sveltejs/adapter-node/1.0.0-next.55:
+    resolution: {integrity: sha512-Kmh8lx8kIY7W6rkqjC78y4dQTyjiAHD9D1WfmUTtYuDW1jAIG+YbZmPC9127kH5KOSGK4+tI8mpReDVB1lgf8g==}
+    dependencies:
+      esbuild: 0.13.12
+      tiny-glob: 0.2.9
+    dev: true
+
+  /@sveltejs/kit/1.0.0-next.196_svelte@3.44.1:
+    resolution: {integrity: sha512-z7sA/2/3Il5biibjPXCYXJC11TyFhgCvMaJvvbtMnu2l3EmOmJBMS+r2djGptzfFsugSVNwGQFn8+ldWQWq3jA==}
     engines: {node: '>=14.13'}
     hasBin: true
     peerDependencies:
@@ -958,6 +967,10 @@ packages:
       type-fest: 0.20.2
     dev: true
 
+  /globalyzer/0.1.0:
+    resolution: {integrity: sha512-40oNTM9UfG6aBmuKxk/giHn5nQ8RVz/SS4Ir6zgzOv9/qC3kKZ9v4etGTcJbEl/NyVQH7FGU7d+X1egr57Md2Q==}
+    dev: true
+
   /globby/11.0.4:
     resolution: {integrity: sha512-9O4MVG9ioZJ08ffbcyVYyLOJLk5JQ688pJ4eMGLpdWLHq/Wr1D9BlriLQyL0E+jbkuePVZXYFj47QM/v093wHg==}
     engines: {node: '>=10'}
@@ -968,6 +981,10 @@ packages:
       ignore: 5.1.9
       merge2: 1.4.1
       slash: 3.0.0
+    dev: true
+
+  /globrex/0.1.2:
+    resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
     dev: true
 
   /graceful-fs/4.2.8:
@@ -1613,6 +1630,13 @@ packages:
 
   /text-table/0.2.0:
     resolution: {integrity: sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=}
+    dev: true
+
+  /tiny-glob/0.2.9:
+    resolution: {integrity: sha512-g/55ssRPUjShh+xkfx9UPDXqhckHEsHr4Vd9zX55oSdGZc/MD0m3sferOkwWtp98bv+kcVfEHtRJgBVJzelrzg==}
+    dependencies:
+      globalyzer: 0.1.0
+      globrex: 0.1.2
     dev: true
 
   /to-regex-range/5.0.1:
