@@ -97,7 +97,7 @@
 		line-height: 1;
 	}
 
-	:global(.svpdf-page-wrapper .textLayer > div) {
+	.svpdf-page-wrapper :global(.textLayer > div) {
 		color: transparent;
 		position: absolute;
 		white-space: pre;
