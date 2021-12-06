@@ -41,15 +41,6 @@
 		<option>impatient-js-preview-book.pdf</option>
 		<option>tackling-ts-preview-book.pdf</option>
 	</select>
-
-	<button
-		on:click={() => {
-			doc_url = 'impatient-js-preview-book.pdf';
-			page = 5;
-		}}
-	>
-		Test switching both page and url
-	</button>
 </div>
 <br />
 Demo PDFs sourced from https://exploringjs.com/
