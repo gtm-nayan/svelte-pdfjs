@@ -1,21 +1,24 @@
 <script lang="ts">
+	import type { PDFDocumentProxy, PDFPageProxy } from 'pdfjs-dist/types/src/display/api';
+	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
+
 	import handleRenderError from './_utils/handleRenderError';
 
-	let pageDiv;
-	let canvas;
-	let textLayerDiv;
+	let pageDiv: HTMLDivElement;
+	let canvas: HTMLCanvasElement;
+	let textLayerDiv: HTMLDivElement;
 
-	export let zoomLevel;
-	export let pageNumber;
-	export let pdfDoc;
+	export let zoomLevel: number;
+	export let pageNumber: number;
+	export let pdfDoc: PDFDocumentProxy;
 
 	let pageRenderTask;
 
-	async function renderPage(doc, pageNum: number, pageZoom: number) {
+	async function renderPage(doc: PDFDocumentProxy, pageNum: number, pageZoom: number) {
 		if (!doc) return;
 
-		let page = await doc.getPage(pageNum);
-		let viewport = page.getViewport({ scale: pageZoom });
+		let page: PDFPageProxy = await doc.getPage(pageNum);
+		let viewport: PageViewport = page.getViewport({ scale: pageZoom });
 
 		canvas.width = viewport.width;
 		canvas.height = viewport.height;
@@ -30,13 +33,13 @@
 	$: renderPage(pdfDoc, pageNumber, zoomLevel).catch((err) => console.log(err));
 </script>
 
-<div class="svpdf-page-wrapper" bind:this={pageDiv}>
+<div class="page-wrapper" bind:this={pageDiv}>
 	<canvas bind:this={canvas} />
-	<div bind:this={textLayerDiv} class="textLayer" />
+	<div bind:this={textLayerDiv} class="text-layer" />
 </div>
 
 <style>
-	.svpdf-page-wrapper {
+	.page-wrapper {
 		position: relative;
 	}
 
@@ -45,7 +48,7 @@
 		display: block;
 	}
 
-	.textLayer {
+	.text-layer {
 		position: absolute;
 		left: 0;
 		top: 0;
@@ -56,7 +59,7 @@
 		line-height: 1;
 	}
 
-	.svpdf-page-wrapper :global(.textLayer > div) {
+	.page-wrapper .text-layer > :global(div) {
 		color: transparent;
 		position: absolute;
 		white-space: pre;
