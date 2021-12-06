@@ -1,5 +1,5 @@
 <script>
-	import PdfViewer from "$lib/index.svelte";
+	import PdfViewer from '$lib/index.svelte';
 	// import { onMount } from 'svelte';
 	// let PdfViewer;
 	// onMount(async () => {
@@ -43,4 +43,4 @@
 	</select>
 </div>
 <br />
-Demo PDFs sourced from https://exploringjs.com/
+Demo PDFs sourced from <a href="https://exploringjs.com/">https://exploringjs.com/</a>
