@@ -1,10 +1,9 @@
 <script>
-	import {PDFViewerCanvas} from '$lib';
-import PdfViewerCanvas from '$lib/PDFViewer/PDFViewerCanvas.svelte';
+	import { PDFViewerCanvas } from '$lib';
 	// import { onMount } from 'svelte';
-	// let PdfViewer;
+	// let PDFViewerCanvas;
 	// onMount(async () => {
-	// 	PdfViewer = (await import('$lib/index.svelte')).default;
+	// 	PDFViewerCanvas = (await import('$lib')).PDFViewerCanvas;
 	// });
 
 	let showPdf = true;
