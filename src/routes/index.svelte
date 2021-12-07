@@ -1,10 +1,5 @@
 <script>
-	import { PDFViewerCanvas } from '$lib';
-	// import { onMount } from 'svelte';
-	// let PDFViewerCanvas;
-	// onMount(async () => {
-	// 	PDFViewerCanvas = (await import('$lib')).PDFViewerCanvas;
-	// });
+	import PDFViewer from '$lib';
 
 	let showPdf = true;
 	let page = 1;
@@ -21,9 +16,7 @@
 {loadprogress}%
 <br />
 {#if showPdf}
-	<!-- <svelte:component
-		this={PdfViewer} -->
-	<PDFViewerCanvas
+	<PDFViewer
 		pdfUrl="/{doc_url}"
 		pageNumber={page}
 		zoomLevel={zoom}
