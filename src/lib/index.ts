@@ -1,3 +1,3 @@
-import { default as PDFViewerCanvas } from './PDFViewer/PDFViewerCanvas.svelte';
+import { default as PDFViewerCanvas } from './PDFViewer/CanvasImpl/PDFViewerCanvas.svelte';
 
 export { PDFViewerCanvas };

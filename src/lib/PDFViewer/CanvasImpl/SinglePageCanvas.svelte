@@ -2,7 +2,7 @@
 	import type { PDFDocumentProxy, PDFPageProxy } from 'pdfjs-dist/types/src/display/api';
 	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
 
-	import handleRenderError from './_utils/handleRenderError';
+	import handleRenderError from '../_utils/handleRenderError';
 
 	let pageDiv: HTMLDivElement;
 	let canvas: HTMLCanvasElement;
