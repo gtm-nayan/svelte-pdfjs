@@ -1,10 +1,11 @@
 ## svelte-pdfjs
 
-A crude implementation of a svelte pdf viewer component, reacts to changes in the URL, password, page number and zoom level. All styling is left upto the user.
+A WIP implementation of a basic svelte pdf viewer component, reacts to changes in the URL, password, page number and zoom level. All styling is left upto the user.
 
-## SSR
+---
+## SvelteKit
 
-Partially SSR compatible. The internal library Pdf.js throws a warning when attempting SSR, can be fixed through vite-plugin-iso if being used in svelte kit.
+It's compatible with SvelteKit, just import the component and use it. No onMount shenanigans required in the consumer since it's already done within the PDFViewer component.
 
 ## License
 
