@@ -8,5 +8,4 @@ A WIP implementation of a basic svelte pdf viewer component, reacts to changes i
 It's compatible with SvelteKit, just import the component and use it. No onMount shenanigans required in the consumer since it's already done within the PDFViewer component.
 
 ## License
-
 [MIT](LICENSE)
