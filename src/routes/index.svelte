@@ -11,8 +11,6 @@
 
 <br />
 
-<progress max="100" value={loadprogress} style="width: 100%" />
-
 {loadprogress}%
 <br />
 {#if showPdf}
