@@ -62,10 +62,6 @@
 		box-sizing: content-box;
 	}
 
-	canvas {
-		margin: 0;
-	}
-
 	.text-layer {
 		position: absolute;
 		left: 0;
@@ -74,7 +70,7 @@
 		bottom: 0;
 		overflow: hidden;
 		line-height: 1;
-		color: rgba(0, 0, 0, 0);
+		opacity: 0.2;
 	}
 
 	.page-wrapper .text-layer > :global(span) {
