@@ -3,6 +3,7 @@
 	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
 
 	import handleRenderError from '../_utils/handleRenderError';
+	import * as pdfJs from 'pdfjs-dist/build/pdf';
 
 	let pageDiv: HTMLDivElement;
 	let canvas: HTMLCanvasElement;
@@ -22,12 +23,27 @@
 
 		canvas.width = viewport.width;
 		canvas.height = viewport.height;
+		pageDiv.style.width = `${canvas.width}px`;
+		pageDiv.style.height = `${canvas.height}px`;
 
 		let ctx = canvas.getContext('2d');
 
 		pageRenderTask?.cancel();
 		pageRenderTask = page.render({ viewport, canvasContext: ctx });
 		pageRenderTask.promise.catch(handleRenderError);
+
+		page.getTextContent().then((textContent) => {
+			textLayerDiv.style.height = `${canvas.height}px`;
+			textLayerDiv.style.width = `${canvas.width}px`;
+
+			textLayerDiv.innerHTML = '';
+			pdfJs.renderTextLayer({
+				textContent: textContent,
+				container: textLayerDiv,
+				viewport: viewport,
+				textDivs: []
+			});
+		});
 	}
 
 	$: renderPage(pdfDoc, pageNumber, zoomLevel).catch((err) => console.log(err));
@@ -41,11 +57,13 @@
 <style>
 	.page-wrapper {
 		position: relative;
+		display: inline-block;
+		padding: 0px;
+		box-sizing: content-box;
 	}
 
 	canvas {
 		margin: 0;
-		display: block;
 	}
 
 	.text-layer {
@@ -55,19 +73,15 @@
 		right: 0;
 		bottom: 0;
 		overflow: hidden;
-		opacity: 0.2;
 		line-height: 1;
+		color: rgba(0, 0, 0, 0);
 	}
 
-	.page-wrapper .text-layer > :global(div) {
+	.page-wrapper .text-layer > :global(span) {
 		color: transparent;
 		position: absolute;
 		white-space: pre;
 		cursor: text;
-		-webkit-transform-origin: 0% 0%;
-		-moz-transform-origin: 0% 0%;
-		-o-transform-origin: 0% 0%;
-		-ms-transform-origin: 0% 0%;
 		transform-origin: 0% 0%;
 	}
 </style>
