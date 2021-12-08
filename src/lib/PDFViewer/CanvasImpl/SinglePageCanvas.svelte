@@ -58,8 +58,6 @@
 	.page-wrapper {
 		position: relative;
 		display: inline-block;
-		padding: 0px;
-		box-sizing: content-box;
 	}
 
 	.text-layer {
