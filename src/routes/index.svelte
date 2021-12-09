@@ -19,7 +19,7 @@
 		pageNumber={page}
 		zoomLevel={zoom}
 		on:documentloaded={(e) => (max_pages = e.detail.numPages)}
-		progressCallback={({ loaded, total }) => (loadprogress = (loaded / total) * 100)}
+		progressCallback={({ loaded, total }) => (loadprogress = (loaded * 100) / total)}
 	/>
 {/if}
 
