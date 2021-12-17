@@ -1,1 +1,2 @@
-export { default as default } from './PDFViewer/PDFViewer.svelte';
+export { default as Document } from './PDFViewer/Document.svelte';
+export { default as Page } from './PDFViewer/Page.svelte';
