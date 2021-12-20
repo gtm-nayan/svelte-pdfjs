@@ -18,7 +18,7 @@
 
 <style>
 	div {
-		display: flex;
+		display: grid;
 		place-items: center;
 	}
 </style>
