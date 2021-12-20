@@ -5,8 +5,9 @@
 
 	export let pageNumber: number = 1;
 	export let zoomLevel: number = 1;
-	export let desiredHeight: number = undefined;
-	export let desiredWidth: number = undefined;
+	export let targetHeight: number = undefined;
+	export let targetWidth: number = undefined;
+	export let rotation: 0 | 90 | 180 | 270 = undefined;
 
 	let InternalPageComponent;
 
@@ -23,6 +24,7 @@
 	this={InternalPageComponent}
 	{pageNumber}
 	{zoomLevel}
-	{desiredHeight}
-	{desiredWidth}
+	{targetHeight}
+	{targetWidth}
+	{rotation}
 />

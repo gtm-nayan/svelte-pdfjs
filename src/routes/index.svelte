@@ -7,5 +7,14 @@
 <input type="range" step="0.25" max="4" min="1" bind:value={zoomLevel} />
 <input type="number" bind:value={pageNumber} />
 <Document file="/tackling-ts-preview-book.pdf">
-	<Page {zoomLevel} {pageNumber} />
+	<div>
+		<Page {zoomLevel} {pageNumber}/>
+	</div>
 </Document>
+
+<style>
+	div {
+		display: flex;
+		place-items: center;
+	}
+</style>
