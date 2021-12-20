@@ -15,7 +15,7 @@ It's compatible with SvelteKit, just import the component and use it. No onMount
 - [x] SvelteKit compatibility 
 - [ ] SVG renderer
 - [ ] Annotation layer  
-
+- [ ] Error handling
 
 ## License
 
