@@ -1,5 +1,5 @@
 <!-- @component
-Render a page from the document. Must be a child of a `Document` component.
+Render a page from a PDF document. Must be a child of a `Document` component.
  -->
 <script lang="ts">
 	import { onMount } from 'svelte';

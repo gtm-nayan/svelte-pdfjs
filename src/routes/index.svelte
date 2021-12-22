@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Document, Page } from '$lib';
+	import { Document, Page } from 'svelte-pdfjs';
 	let zoomLevel: number = 1;
 	let pageNumber: number = 1;
 	let docUrl = '/tackling-ts-preview-book.pdf';
