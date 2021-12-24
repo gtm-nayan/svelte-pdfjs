@@ -18,7 +18,7 @@
 
 	<input type="radio" value="/tackling-ts-preview-book.pdf" bind:group={docUrl} /> Doc 1
 	<input type="radio" value="/impatient-js-preview-book.pdf" bind:group={docUrl} /> Doc 2
-	<input type="radio" bind:group={docUrl} value="/yadayada.pdf" /> Doc 3
+	<input type="radio" bind:group={docUrl} value="/yadayada.pdf" /> Doc 3 (doesn't exist)
 </section>
 
 <Document file={docUrl} on:loadsuccess={loadSuccessHandler} on:loaderror={console.log}>
