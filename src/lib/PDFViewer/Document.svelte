@@ -5,7 +5,7 @@ children Page components through the context API (key: svelte_pdf_current_doc)
 <script lang="ts">
 	import type {
 		DocumentInitParameters,
-		OnProgressParameters
+		OnProgressParameters,
 	} from 'pdfjs-dist/types/src/display/api';
 	import { onMount } from 'svelte';
 
@@ -30,6 +30,13 @@ children Page components through the context API (key: svelte_pdf_current_doc)
 	});
 </script>
 
-<svelte:component this={InternalDocumentComponent} {file} {loadOptions} {onProgress}>
+<svelte:component
+	this={InternalDocumentComponent}
+	{file}
+	{loadOptions}
+	{onProgress}
+	on:loadsuccess
+	on:loaderror
+>
 	<slot />
 </svelte:component>

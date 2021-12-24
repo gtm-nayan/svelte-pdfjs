@@ -6,7 +6,7 @@
 		PDFDocumentLoadingTask,
 		PDFDocumentProxy
 	} from 'pdfjs-dist/types/src/display/api';
-	import { setContext } from 'svelte';
+	import { createEventDispatcher, setContext } from 'svelte';
 	import { readable, writable } from 'svelte/store';
 	PDFJS.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${PDFJS.version}/build/pdf.worker.min.js`;
 
@@ -18,6 +18,8 @@
 </script>
 
 <script lang="ts">
+	const dispatch = createEventDispatcher<{ loadsuccess: PDFDocumentProxy; loaderror: Error }>();
+
 	export let file: string | URL = undefined;
 	export let loadOptions: DocumentInitParameters = undefined;
 	export let onProgress: (params: OnProgressParameters) => void = undefined;
@@ -35,9 +37,11 @@
 			loadingTask.onProgress = onProgress;
 			loadingTask.promise.then((doc) => {
 				currentDoc.set(doc);
+				dispatch('loadsuccess', doc);
 			});
-		} catch {
+		} catch (err) {
 			currentDoc.set(prevDoc);
+			dispatch('loaderror', err);
 		}
 		// TODO: Handle errors and stuff
 	}
