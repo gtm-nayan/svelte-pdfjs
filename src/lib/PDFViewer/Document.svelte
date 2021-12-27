@@ -6,9 +6,20 @@ children Page components through the context API (key: svelte_pdf_current_doc)
 	import type {
 		DocumentInitParameters,
 		OnProgressParameters,
+		PDFDocumentProxy,
 	} from 'pdfjs-dist/types/src/display/api';
 	import { onMount } from 'svelte';
 
+	interface $$Events {
+		/**
+		 * Emitted when a document is loaded successfully.
+		 */
+		loadsuccess: CustomEvent<PDFDocumentProxy>;
+		/**
+		 * Emitted when there's an error loading the document.
+		 */
+		loaderror: CustomEvent<Error>;
+	}
 	/**
 	 * The URL of the file to load.
 	 */

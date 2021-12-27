@@ -1,15 +1,9 @@
 <script lang="ts">
-	import type { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api';
-
 	import { Document, Page } from 'svelte-pdfjs';
 	let zoomLevel: number = 1;
 	let pageNumber: number = 1;
 	let docUrl = '/tackling-ts-preview-book.pdf';
 	let maxPages = 1;
-
-	function loadSuccessHandler(evt: CustomEvent<PDFDocumentProxy>) {
-		console.log((maxPages = evt.detail.numPages));
-	}
 </script>
 
 <section class="settings">
@@ -21,7 +15,7 @@
 	<input type="radio" bind:group={docUrl} value="/yadayada.pdf" /> Doc 3 (doesn't exist)
 </section>
 
-<Document file={docUrl} on:loadsuccess={loadSuccessHandler} on:loaderror={console.log}>
+<Document file={docUrl} on:loadsuccess={(e) => console.log(e.detail.numPages)} on:loaderror={console.log}>
 	<div>
 		<Page {zoomLevel} {pageNumber} />
 	</div>
