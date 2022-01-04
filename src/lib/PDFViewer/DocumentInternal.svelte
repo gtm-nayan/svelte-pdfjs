@@ -10,7 +10,7 @@
 	import { readable, writable } from 'svelte/store';
 	PDFJS.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${PDFJS.version}/build/pdf.worker.min.js`;
 
-	let PDFWorker = readable<any>(null, (set) => {
+	let PDFWorker = readable<PDFJS.PDFWorker>(null, (set) => {
 		const worker = new PDFJS.PDFWorker();
 		set(worker);
 		return () => worker.destroy();
