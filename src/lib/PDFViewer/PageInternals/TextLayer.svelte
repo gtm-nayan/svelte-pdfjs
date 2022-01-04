@@ -19,7 +19,7 @@
 			container,
 			textContent,
 			viewport,
-			enhanceTextSelection: true
+			enhanceTextSelection: true,
 		});
 	}
 

@@ -34,12 +34,12 @@
 			}
 			viewport = page.getViewport({
 				scale,
-				rotation
+				rotation,
 			});
 		} else {
 			viewport = page.getViewport({
 				scale: zoomLevel,
-				rotation
+				rotation,
 			});
 		}
 
@@ -53,7 +53,7 @@
 		renderTask?.cancel();
 		renderTask = page.render({
 			canvasContext,
-			viewport
+			viewport,
 		});
 	}
 

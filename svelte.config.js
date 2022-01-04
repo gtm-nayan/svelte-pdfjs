@@ -15,11 +15,11 @@ const config = {
 		vite: {
 			resolve: {
 				alias: {
-					'svelte-pdfjs': path.resolve('src/lib')
-				}
-			}
-		}
-	}
+					'svelte-pdfjs': path.resolve('src/lib'),
+				},
+			},
+		},
+	},
 };
 
 export default config;

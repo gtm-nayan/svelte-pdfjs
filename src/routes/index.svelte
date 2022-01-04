@@ -15,7 +15,11 @@
 	<input type="radio" bind:group={docUrl} value="/yadayada.pdf" /> Doc 3 (doesn't exist)
 </section>
 
-<Document file={docUrl} on:loadsuccess={(e) => console.log(e.detail.numPages)} on:loaderror={console.log}>
+<Document
+	file={docUrl}
+	on:loadsuccess={(e) => console.log(e.detail.numPages)}
+	on:loaderror={console.log}
+>
 	<div>
 		<Page {zoomLevel} {pageNumber} />
 	</div>

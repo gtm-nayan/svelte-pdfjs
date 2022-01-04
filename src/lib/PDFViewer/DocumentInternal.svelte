@@ -4,7 +4,7 @@
 		DocumentInitParameters,
 		OnProgressParameters,
 		PDFDocumentLoadingTask,
-		PDFDocumentProxy
+		PDFDocumentProxy,
 	} from 'pdfjs-dist/types/src/display/api';
 	import { createEventDispatcher, setContext } from 'svelte';
 	import { readable, writable } from 'svelte/store';
