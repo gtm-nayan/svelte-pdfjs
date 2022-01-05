@@ -34,12 +34,10 @@ children Page components through the context API (key: svelte_pdf_current_doc)
 	 */
 	export let onProgress: (params: OnProgressParameters) => void = undefined;
 
-
 	let InternalDocumentComponent;
 
 	onMount(async () => {
-		const i = await import('./DocumentInternal.svelte');
-		InternalDocumentComponent = i.default;
+		InternalDocumentComponent = (await import('./DocumentInternal.svelte')).default;
 	});
 </script>
 
