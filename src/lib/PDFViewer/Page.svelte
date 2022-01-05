@@ -37,15 +37,10 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	import type PageCanvas from './PageInternals/PageCanvas.svelte';
 	import type PageSvg from './PageInternals/PageSVG.svelte';
 
-	const currentDoc: Writable<PDFDocumentProxy> = getContext('svelte_pdf_current_doc');
-
-	let page: PDFPageProxy;
-	let viewport: PageViewport;
-	
 	/**
 	 * What renderer implementation to use for the page.
 	 * SVG rendering not implemented yet.
-	 * @default "canvas"
+	 * @default {"canvas"}
 	 */
 	export let renderer: 'canvas' | 'svg' = 'canvas';
 	/**
@@ -54,6 +49,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	export let pageNumber: number = 1;
 	/**
 	 * The scale to show the PDF at.
+	 * @default {1}
 	 */
 	export let zoomLevel: number = 1;
 	/**
@@ -71,13 +67,22 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	 */
 	export let rotation: MultipleOf90 = undefined;
 
-	let InternalPageComponent: PageSvg | PageCanvas;
+	/* <========================================================================================> */
 
+	let InternalPageComponent: PageSvg | PageCanvas;
 	onMount(async () => {
 		InternalPageComponent = (
 			await import(`./PageInternals/Page${renderer === 'svg' ? 'SVG' : 'Canvas'}.svelte`)
 		).default;
 	});
+	/* <========================================================================================> */
+
+	const currentDoc: Writable<PDFDocumentProxy> = getContext('svelte_pdf_current_doc');
+
+	let page: PDFPageProxy;
+	let viewport: PageViewport;
+
+	/* <========================================================================================> */
 
 	$: if ($currentDoc) $currentDoc.getPage(pageNumber).then((p) => (page = p));
 	$: if (page) viewport = getViewport(page, targetHeight, targetWidth, zoomLevel, rotation);
