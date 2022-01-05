@@ -1,15 +1,53 @@
 <!-- @component
 Render a page from a PDF document. Must be a child of a `Document` component.
  -->
-<script lang="ts">
-	import { onMount } from 'svelte';
+<script context="module" lang="ts">
+	type MultipleOf90 = 0 | 90 | 180 | 270;
 
+	function getViewport(
+		page: PDFPageProxy,
+		height: number,
+		width: number,
+		scale: number,
+		rotation: MultipleOf90
+	) {
+		const tmp_viewport = page.getViewport({ scale: 1, rotation });
+		if (width || height) {
+			let scale = height / tmp_viewport.height;
+			if (width) {
+				scale = width / tmp_viewport.width;
+			}
+			return page.getViewport({
+				scale,
+				rotation,
+			});
+		}
+		return page.getViewport({
+			scale,
+			rotation,
+		});
+	}
+</script>
+
+<script lang="ts">
+	import type { PDFDocumentProxy, PDFPageProxy } from 'pdfjs-dist/types/src/display/api';
+	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
+	import { getContext, onMount } from 'svelte';
+	import type { Writable } from 'svelte/store';
+	import type PageCanvas from './PageInternals/PageCanvas.svelte';
+	import type PageSvg from './PageInternals/PageSVG.svelte';
+
+	const currentDoc: Writable<PDFDocumentProxy> = getContext('svelte_pdf_current_doc');
+
+	let page: PDFPageProxy;
+	let viewport: PageViewport;
+	
 	/**
 	 * What renderer implementation to use for the page.
-	 * Defaults to canvas. SVG rendering not implemented yet.
+	 * SVG rendering not implemented yet.
+	 * @default "canvas"
 	 */
 	export let renderer: 'canvas' | 'svg' = 'canvas';
-
 	/**
 	 * The page number to show.
 	 */
@@ -31,24 +69,18 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	/**
 	 * Rotate the page by a multiple of 90 degrees.
 	 */
-	export let rotation: 0 | 90 | 180 | 270 = undefined;
+	export let rotation: MultipleOf90 = undefined;
 
-	let InternalPageComponent;
+	let InternalPageComponent: PageSvg | PageCanvas;
 
 	onMount(async () => {
 		InternalPageComponent = (
-			await (renderer === 'svg'
-				? import('./PageInternals/PageSVG.svelte')
-				: import('./PageInternals/PageCanvas.svelte'))
+			await import(`./PageInternals/Page${renderer === 'svg' ? 'SVG' : 'Canvas'}.svelte`)
 		).default;
 	});
+
+	$: if ($currentDoc) $currentDoc.getPage(pageNumber).then((p) => (page = p));
+	$: if (page) viewport = getViewport(page, targetHeight, targetWidth, zoomLevel, rotation);
 </script>
 
-<svelte:component
-	this={InternalPageComponent}
-	{pageNumber}
-	{zoomLevel}
-	{targetHeight}
-	{targetWidth}
-	{rotation}
-/>
+<svelte:component this={InternalPageComponent} {page} {viewport} />

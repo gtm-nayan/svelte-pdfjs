@@ -10,8 +10,6 @@
 	let container: HTMLDivElement;
 
 	async function render() {
-		if (!page) return;
-
 		const textContent = await page.getTextContent();
 		renderTask?.cancel();
 		container.innerHTML = '';
@@ -23,11 +21,7 @@
 		});
 	}
 
-	$: {
-		page;
-		viewport;
-		render();
-	}
+	$: if (page && viewport) render();
 </script>
 
 <div bind:this={container} />
