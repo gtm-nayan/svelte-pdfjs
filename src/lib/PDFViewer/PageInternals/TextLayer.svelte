@@ -21,7 +21,7 @@
 		});
 	}
 
-	$: if (page && viewport) render();
+	$: if (viewport) render();
 </script>
 
 <div bind:this={container} />
