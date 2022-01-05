@@ -22,7 +22,7 @@
 
 <Document
 	file={docUrl}
-	on:loadsuccess={(e) => console.log(e.detail.numPages)}
+	on:loadsuccess={(e) => console.log((maxPages = e.detail.numPages))}
 	on:loaderror={console.log}
 >
 	<div>
