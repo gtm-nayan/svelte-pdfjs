@@ -1,7 +1,10 @@
 <script lang="ts">
-	import { Document, Page } from 'svelte-pdfjs';
+	import { Document, Page, PDFJS } from 'svelte-pdfjs';
 	import workerSrc from 'pdfjs-dist/build/pdf.worker.min.js?url';
 
+	if (PDFJS.GlobalWorkerOptions) {
+		PDFJS.GlobalWorkerOptions.workerSrc = workerSrc;
+	}
 	let zoomLevel: number = 1;
 	let pageNumber: number = 1;
 	let docUrl = '/tackling-ts-preview-book.pdf';
@@ -21,7 +24,6 @@
 	file={docUrl}
 	on:loadsuccess={(e) => console.log(e.detail.numPages)}
 	on:loaderror={console.log}
-	{workerSrc}
 >
 	<div>
 		<Page {zoomLevel} {pageNumber} />
