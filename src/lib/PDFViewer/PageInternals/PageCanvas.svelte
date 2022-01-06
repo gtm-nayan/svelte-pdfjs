@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { PDFPageProxy } from 'pdfjs-dist/types/src/display/api';
 	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
-
 	import TextLayer from './TextLayer.svelte';
 
 	export let page: PDFPageProxy;

@@ -64,8 +64,9 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	export let targetWidth: number = undefined;
 	/**
 	 * Rotate the page by a multiple of 90 degrees.
+	 * @default {0}
 	 */
-	export let rotation: MultipleOf90 = undefined;
+	export let rotation: MultipleOf90 = 0;
 
 	/* <========================================================================================> */
 
@@ -75,6 +76,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 			await import(`./PageInternals/Page${renderer === 'svg' ? 'SVG' : 'Canvas'}.svelte`)
 		).default;
 	});
+
 	/* <========================================================================================> */
 
 	const currentDoc: Writable<PDFDocumentProxy> = getContext('svelte_pdf_current_doc');
