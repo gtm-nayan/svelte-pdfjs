@@ -2,21 +2,33 @@
 Renderless component responsible for just loading the document and providing it to
 children Page components through the context API (key: svelte_pdf_current_doc)
  -->
-<script lang="ts">
+<script lang="ts" context="module">
+	import * as PDFJS from 'pdfjs-dist';
 	import type {
 		DocumentInitParameters,
 		OnProgressParameters,
+		PDFDocumentLoadingTask,
 		PDFDocumentProxy,
 	} from 'pdfjs-dist/types/src/display/api';
-	import { onMount } from 'svelte';
+	import { createEventDispatcher, setContext } from 'svelte';
+	import { readable, writable } from 'svelte/store';
+	let PDFWorker = readable<PDFJS.PDFWorker>(null, (set) => {
+		const worker = new PDFJS.PDFWorker();
+		set(worker);
+		return () => worker.destroy();
+	});
+</script>
+
+<script lang="ts">
+	const dispatch = createEventDispatcher();
 
 	interface $$Events {
 		/**
-		 * Emitted when a document is loaded successfully.
+		 * Dispatched when a document is successfully loaded.
 		 */
 		loadsuccess: CustomEvent<PDFDocumentProxy>;
 		/**
-		 * Emitted when there's an error loading the document.
+		 * Dispatched when there's an error while loading the document.
 		 */
 		loaderror: CustomEvent<Error>;
 	}
@@ -33,20 +45,28 @@ children Page components through the context API (key: svelte_pdf_current_doc)
 	 */
 	export let onProgress: (params: OnProgressParameters) => void = undefined;
 
-	let InternalDocumentComponent;
+	let current_doc = writable<PDFDocumentProxy>(null);
+	let loading_task: PDFDocumentLoadingTask;
+	setContext('svelte_pdf_current_doc', current_doc);
 
-	onMount(async () => {
-		InternalDocumentComponent = (await import('./DocumentInternal.svelte')).default;
-	});
+	function load_document() {
+		const previous_doc = $current_doc;
+		try {
+			loading_task?.destroy();
+			current_doc.set(null);
+			loading_task = PDFJS.getDocument({ url: file, worker: $PDFWorker, ...loadOptions });
+			loading_task.onProgress = onProgress;
+			loading_task.promise.then((doc) => {
+				current_doc.set(doc);
+				dispatch('loadsuccess', doc);
+			});
+		} catch (err) {
+			current_doc.set(previous_doc);
+			dispatch('loaderror', err);
+		}
+		/** @todo Handle errors and stuff */
+	}
+	$: file, loadOptions, load_document();
 </script>
 
-<svelte:component
-	this={InternalDocumentComponent}
-	{file}
-	{loadOptions}
-	{onProgress}
-	on:loadsuccess
-	on:loaderror
->
-	<slot />
-</svelte:component>
+<slot />

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Document, Page, PDFJS } from 'svelte-pdfjs';
 	import workerSrc from 'pdfjs-dist/build/pdf.worker.min.js?url';
+	import { browser } from '$app/env';
 
 	if (PDFJS.GlobalWorkerOptions) {
 		PDFJS.GlobalWorkerOptions.workerSrc = workerSrc;
@@ -23,15 +24,17 @@
 	<input type="checkbox" bind:checked={renderTextLayer} /> Render text layer
 </section>
 
-<Document
-	{file}
-	on:loadsuccess={(e) => console.log((maxPages = e.detail.numPages))}
-	on:loaderror={console.log}
->
-	<div>
-		<Page {zoomLevel} {pageNumber} {renderTextLayer} />
-	</div>
-</Document>
+{#if browser}
+	<Document
+		{file}
+		on:loadsuccess={(e) => console.log((maxPages = e.detail.numPages))}
+		on:loaderror={console.log}
+	>
+		<div>
+			<Page {zoomLevel} {pageNumber} {renderTextLayer} />
+		</div>
+	</Document>
+{/if}
 
 <style>
 	div {
