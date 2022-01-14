@@ -5,6 +5,7 @@
 
 	export let page: PDFPageProxy;
 	export let viewport: PageViewport;
+	export let renderTextLayer: boolean;
 
 	let pageDiv: HTMLDivElement;
 	let canvas: HTMLCanvasElement;
@@ -31,7 +32,9 @@
 
 <div bind:this={pageDiv}>
 	<canvas bind:this={canvas} />
-	<TextLayer {page} {viewport} />
+	{#if renderTextLayer}
+		<TextLayer {page} {viewport} />
+	{/if}
 </div>
 
 <style>

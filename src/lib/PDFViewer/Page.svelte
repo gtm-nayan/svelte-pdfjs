@@ -2,6 +2,13 @@
 Render a page from a PDF document. Must be a child of a `Document` component.
  -->
 <script context="module" lang="ts">
+	import type { PDFDocumentProxy, PDFPageProxy } from 'pdfjs-dist/types/src/display/api';
+	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
+	import { getContext, onMount } from 'svelte';
+	import type { Writable } from 'svelte/store';
+	import type PageCanvas from './PageInternals/PageCanvas.svelte';
+	import type PageSvg from './PageInternals/PageSVG.svelte';
+
 	type MultipleOf90 = 0 | 90 | 180 | 270;
 
 	function getViewport(
@@ -30,13 +37,6 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 </script>
 
 <script lang="ts">
-	import type { PDFDocumentProxy, PDFPageProxy } from 'pdfjs-dist/types/src/display/api';
-	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
-	import { getContext, onMount } from 'svelte';
-	import type { Writable } from 'svelte/store';
-	import type PageCanvas from './PageInternals/PageCanvas.svelte';
-	import type PageSvg from './PageInternals/PageSVG.svelte';
-
 	/**
 	 * What renderer implementation to use for the page.
 	 * SVG rendering not implemented yet.
@@ -67,6 +67,11 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	 * @default {0}
 	 */
 	export let rotation: MultipleOf90 = 0;
+	/**
+	 * Render a separate text layer (only for the canvas renderer.)
+	 * @default {false}
+	 */
+	export let renderTextLayer: boolean = false;
 
 	/* <========================================================================================> */
 
@@ -90,4 +95,9 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	$: if (page) viewport = getViewport(page, targetHeight, targetWidth, zoomLevel, rotation);
 </script>
 
-<svelte:component this={InternalPageComponent} {page} {viewport} />
+<svelte:component
+	this={InternalPageComponent}
+	{page}
+	{viewport}
+	renderTextLayer={renderer === 'canvas' ? renderTextLayer : undefined}
+/>

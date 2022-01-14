@@ -9,6 +9,7 @@
 	let pageNumber: number = 1;
 	let docUrl = '/tackling-ts-preview-book.pdf';
 	let maxPages = 1;
+	let renderTextLayer;
 </script>
 
 <section class="settings">
@@ -18,6 +19,8 @@
 	<input type="radio" value="/tackling-ts-preview-book.pdf" bind:group={docUrl} /> Doc 1
 	<input type="radio" value="/impatient-js-preview-book.pdf" bind:group={docUrl} /> Doc 2
 	<input type="radio" bind:group={docUrl} value="/yadayada.pdf" /> Doc 3 (doesn't exist)
+
+	<input type="checkbox" bind:checked={renderTextLayer} /> Render text layer
 </section>
 
 <Document
@@ -26,7 +29,7 @@
 	on:loaderror={console.log}
 >
 	<div>
-		<Page {zoomLevel} {pageNumber} />
+		<Page {zoomLevel} {pageNumber} {renderTextLayer} />
 	</div>
 </Document>
 
