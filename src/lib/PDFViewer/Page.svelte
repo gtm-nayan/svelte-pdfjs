@@ -11,7 +11,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 
 	type MultipleOf90 = 0 | 90 | 180 | 270;
 
-	function getViewport(
+	function get_viewport(
 		page: PDFPageProxy,
 		height: number,
 		width: number,
@@ -84,20 +84,20 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 
 	/* <========================================================================================> */
 
-	const currentDoc: Writable<PDFDocumentProxy> = getContext('svelte_pdf_current_doc');
+	const current_doc: Writable<PDFDocumentProxy> = getContext('svelte_pdf_current_doc');
 
 	let page: PDFPageProxy;
 	let viewport: PageViewport;
 
 	/* <========================================================================================> */
 
-	$: if ($currentDoc) $currentDoc.getPage(pageNumber).then((p) => (page = p));
-	$: if (page) viewport = getViewport(page, targetHeight, targetWidth, zoomLevel, rotation);
+	$: if ($current_doc) $current_doc.getPage(pageNumber).then((p) => (page = p));
+	$: if (page) viewport = get_viewport(page, targetHeight, targetWidth, zoomLevel, rotation);
 </script>
 
 <svelte:component
 	this={InternalPageComponent}
 	{page}
 	{viewport}
-	renderTextLayer={renderer === 'canvas' ? renderTextLayer : undefined}
+	render_text_layer={renderer === 'canvas' ? renderTextLayer : undefined}
 />

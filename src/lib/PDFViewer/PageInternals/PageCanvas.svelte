@@ -5,34 +5,34 @@
 
 	export let page: PDFPageProxy;
 	export let viewport: PageViewport;
-	export let renderTextLayer: boolean;
+	export let render_text_layer: boolean;
 
-	let pageDiv: HTMLDivElement;
+	let page_div: HTMLDivElement;
 	let canvas: HTMLCanvasElement;
 
-	let renderTask: ReturnType<PDFPageProxy['render']>;
+	let render_task: ReturnType<PDFPageProxy['render']>;
 
-	async function renderPage() {
+	async function render_page() {
 		canvas.width = viewport.width;
 		canvas.height = viewport.height;
-		pageDiv.style.width = `${canvas.width}px`;
-		pageDiv.style.height = `${canvas.height}px`;
+		page_div.style.width = `${canvas.width}px`;
+		page_div.style.height = `${canvas.height}px`;
 
 		const canvasContext = canvas.getContext('2d');
 
-		renderTask?.cancel();
-		renderTask = page.render({
+		render_task?.cancel();
+		render_task = page.render({
 			canvasContext,
 			viewport,
 		});
 	}
 
-	$: if (viewport) renderPage();
+	$: if (viewport) render_page();
 </script>
 
-<div bind:this={pageDiv}>
+<div bind:this={page_div}>
 	<canvas bind:this={canvas} />
-	{#if renderTextLayer}
+	{#if render_text_layer}
 		<TextLayer {page} {viewport} />
 	{/if}
 </div>

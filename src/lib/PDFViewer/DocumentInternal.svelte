@@ -22,23 +22,23 @@
 	export let loadOptions: DocumentInitParameters = undefined;
 	export let onProgress: (params: OnProgressParameters) => void = undefined;
 
-	let currentDoc = writable<PDFDocumentProxy>(null);
-	let loadingTask: PDFDocumentLoadingTask;
-	setContext('svelte_pdf_current_doc', currentDoc);
+	let current_doc = writable<PDFDocumentProxy>(null);
+	let loading_task: PDFDocumentLoadingTask;
+	setContext('svelte_pdf_current_doc', current_doc);
 
-	function loadDocument() {
-		const prevDoc = $currentDoc;
+	function load_document() {
+		const previous_doc = $current_doc;
 		try {
-			loadingTask?.destroy();
-			currentDoc.set(null);
-			loadingTask = PDFJS.getDocument({ url: file, worker: $PDFWorker, ...loadOptions });
-			loadingTask.onProgress = onProgress;
-			loadingTask.promise.then((doc) => {
-				currentDoc.set(doc);
+			loading_task?.destroy();
+			current_doc.set(null);
+			loading_task = PDFJS.getDocument({ url: file, worker: $PDFWorker, ...loadOptions });
+			loading_task.onProgress = onProgress;
+			loading_task.promise.then((doc) => {
+				current_doc.set(doc);
 				dispatch('loadsuccess', doc);
 			});
 		} catch (err) {
-			currentDoc.set(prevDoc);
+			current_doc.set(previous_doc);
 			dispatch('loaderror', err);
 		}
 		// TODO: Handle errors and stuff
@@ -47,7 +47,7 @@
 	$: {
 		file;
 		loadOptions;
-		loadDocument();
+		load_document();
 	}
 </script>
 
