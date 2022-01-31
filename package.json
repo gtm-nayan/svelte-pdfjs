@@ -1,6 +1,6 @@
 {
 	"name": "svelte-pdfjs",
-	"version": "0.3.0-alpha.0",
+	"version": "0.3.0-alpha.1",
 	"scripts": {
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",
