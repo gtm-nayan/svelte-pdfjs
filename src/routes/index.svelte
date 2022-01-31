@@ -7,7 +7,7 @@
 		PDFJS.GlobalWorkerOptions.workerSrc = workerSrc;
 	}
 	let scale: number = 1;
-	let pageNumber: number = 1;
+	let num: number = 1;
 	let file = '/tackling-ts-preview-book.pdf';
 	let maxPages = 1;
 	let renderTextLayer: boolean;
@@ -15,7 +15,7 @@
 
 <section class="settings">
 	<input type="range" step="0.25" max="4" min="1" bind:value={scale} />
-	<input type="number" bind:value={pageNumber} step="1" min="1" max={maxPages} />
+	<input type="number" bind:value={num} step="1" min="1" max={maxPages} />
 
 	<input type="radio" value="/tackling-ts-preview-book.pdf" bind:group={file} /> Doc 1
 	<input type="radio" value="/impatient-js-preview-book.pdf" bind:group={file} /> Doc 2
@@ -31,7 +31,7 @@
 		on:loaderror={console.log}
 	>
 		<div>
-			<Page {scale} {pageNumber} {renderTextLayer} rotation={90} />
+			<Page {scale} {num} {renderTextLayer} rotation={90} />
 		</div>
 	</Document>
 {/if}

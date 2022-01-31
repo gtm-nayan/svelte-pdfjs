@@ -29,7 +29,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	/**
 	 * The page number to show.
 	 */
-	export let pageNumber: number;
+	export let num: number;
 	/**
 	 * The scale to show the PDF at.
 	 * @default {1}
@@ -70,7 +70,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 
 	/* <========================================================================================> */
 
-	$: if ($current_doc) $current_doc.getPage(pageNumber).then((p) => (page = p));
+	$: if ($current_doc) $current_doc.getPage(num).then((p) => (page = p));
 
 	$: _get_viewport =
 		getViewport ?? ((p: PDFPageProxy) => default_get_viewport(p, { scale, rotation }));
