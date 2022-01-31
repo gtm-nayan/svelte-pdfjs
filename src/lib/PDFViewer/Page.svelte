@@ -1,15 +1,21 @@
 <!-- @component
 Render a page from a PDF document. Must be a child of a `Document` component.
  -->
+<svelte:options immutable />
+
+<!--
+	@todo Immutable could be a bad idea since it would not update 
+	for getViewport functions that are defined inline
+	when their dependencies change.
+ -->
 <script context="module" lang="ts">
+	import type { MultipleOf90 } from '$lib/utils/target_dimension.js';
 	import type { PDFDocumentProxy, PDFPageProxy } from 'pdfjs-dist/types/src/display/api';
 	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
 	import { getContext, onMount } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import type PageCanvas from './PageInternals/PageCanvas.svelte';
 	import type PageSvg from './PageInternals/PageSVG.svelte';
-
-	type MultipleOf90 = 0 | 90 | 180 | 270;
 
 	function default_get_viewport(
 		page: PDFPageProxy,
@@ -50,7 +56,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	 * A callback invoked with the current page used to determine the viewport.
 	 * Use this if you need something more complicated than the default based on scale.
 	 */
-	export let getViewport: (page: PDFPageProxy) => PageViewport = undefined;
+	export let getViewport: (page: PDFPageProxy, rotation: MultipleOf90) => PageViewport = undefined;
 
 	/* <========================================================================================> */
 
@@ -72,10 +78,9 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 
 	$: if ($current_doc) $current_doc.getPage(num).then((p) => (page = p));
 
-	$: _get_viewport =
-		getViewport ?? ((p: PDFPageProxy) => default_get_viewport(p, { scale, rotation }));
+	$: _get_viewport = getViewport ?? ((p) => default_get_viewport(p, { scale, rotation }));
 
-	$: if (page) viewport = _get_viewport(page);
+	$: if (page) viewport = _get_viewport(page, rotation);
 </script>
 
 <svelte:component

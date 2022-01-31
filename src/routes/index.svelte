@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Document, Page, PDFJS } from 'svelte-pdfjs';
+	import { Document, MultipleOf90, Page, PDFJS, preferThisHeight } from 'svelte-pdfjs';
 	import workerSrc from 'pdfjs-dist/build/pdf.worker.min.js?url';
 	import { browser } from '$app/env';
 
@@ -11,6 +11,12 @@
 	let file = '/tackling-ts-preview-book.pdf';
 	let maxPages = 1;
 	let renderTextLayer: boolean;
+	let targetHeight = 500;
+	let rotation: MultipleOf90 = 0;
+
+	const handleSelect = (e) => {
+		rotation = parseInt(e.currentTarget.value) as MultipleOf90;
+	};
 </script>
 
 <section class="settings">
@@ -22,6 +28,13 @@
 	<input type="radio" bind:group={file} value="/yadayada.pdf" /> Doc 3 (doesn't exist)
 
 	<input type="checkbox" bind:checked={renderTextLayer} /> Render text layer
+	<input type="range" step="20" max="700" min="300" bind:value={targetHeight} />
+	<select on:change={handleSelect}>
+		<option>0</option>
+		<option>90</option>
+		<option>180</option>
+		<option>270</option>
+	</select>
 </section>
 
 {#if browser}
@@ -31,7 +44,13 @@
 		on:loaderror={console.log}
 	>
 		<div>
-			<Page {scale} {num} {renderTextLayer} rotation={90} />
+			<Page
+				{scale}
+				{num}
+				{renderTextLayer}
+				{rotation}
+				getViewport={preferThisHeight(targetHeight)}
+			/>
 		</div>
 	</Document>
 {/if}
