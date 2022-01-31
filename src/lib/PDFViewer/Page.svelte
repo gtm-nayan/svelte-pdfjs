@@ -29,7 +29,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	/**
 	 * The page number to show.
 	 */
-	export let pageNumber: number = 1;
+	export let pageNumber: number;
 	/**
 	 * The scale to show the PDF at.
 	 * @default {1}
