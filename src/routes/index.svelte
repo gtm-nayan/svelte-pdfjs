@@ -31,7 +31,7 @@
 		on:loaderror={console.log}
 	>
 		<div>
-			<Page {zoomLevel} {pageNumber} {renderTextLayer} />
+			<Page {zoomLevel} {pageNumber} {renderTextLayer} rotation={90}/>
 		</div>
 	</Document>
 {/if}
