@@ -34,17 +34,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	 * The scale to show the PDF at.
 	 * @default {1}
 	 */
-	export let zoomLevel: number = 1;
-	// /**
-	//  * Override the height to render the page at.
-	//  * If both `targetHeight` and `targetWidth` are provided, then targetWidth takes precedence.
-	//  */
-	// export let targetHeight: number = undefined;
-	// /**
-	//  * Override the width to render the page at.
-	//  * If both `targetHeight` and `targetWidth` are provided, then targetWidth takes precedence.
-	//  */
-	// export let targetWidth: number = undefined;
+	export let scale: number = 1;
 	/**
 	 * Rotate the page by a multiple of 90 degrees.
 	 * @default {0}
@@ -83,7 +73,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	$: if ($current_doc) $current_doc.getPage(pageNumber).then((p) => (page = p));
 
 	$: _get_viewport =
-		getViewport ?? ((p: PDFPageProxy) => default_get_viewport(p, { scale: zoomLevel, rotation }));
+		getViewport ?? ((p: PDFPageProxy) => default_get_viewport(p, { scale, rotation }));
 
 	$: if (page) viewport = _get_viewport(page);
 </script>
