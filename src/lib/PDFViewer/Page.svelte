@@ -61,11 +61,6 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	/* <========================================================================================> */
 
 	let InternalPageComponent: PageSvg | PageCanvas;
-	onMount(async () => {
-		InternalPageComponent = (
-			await import(`./PageInternals/Page${renderer === 'svg' ? 'SVG' : 'Canvas'}.svelte`)
-		).default;
-	});
 
 	/* <========================================================================================> */
 
@@ -83,9 +78,11 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	$: if (page) viewport = _get_viewport(page, rotation);
 </script>
 
-<svelte:component
-	this={InternalPageComponent}
-	{page}
-	{viewport}
-	render_text_layer={renderer === 'canvas' ? renderTextLayer : undefined}
-/>
+{#await renderer === 'canvas' ? import('./PageInternals/PageCanvas.svelte') : import('./PageInternals/PageSVG.svelte') then { default: p }}
+	<svelte:component
+		this={p}
+		{page}
+		{viewport}
+		render_text_layer={renderer === 'canvas' ? renderTextLayer : undefined}
+	/>
+{/await}
