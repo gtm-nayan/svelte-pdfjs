@@ -9,7 +9,7 @@ Demo: [Netlify](https://svelte-pdfjs.netlify.app)
 
 ## SvelteKit
 
-It's compatible with SvelteKit, just import the component and use it. No onMount shenanigans required in the consumer since it's already done within the PDFViewer component.
+It's compatible with SvelteKit, just import the component and use it in a `{#if browser}` you'll have to install pdfjs-dist as a dependency.
 
 ## TODOs:
 
