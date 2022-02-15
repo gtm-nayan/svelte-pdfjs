@@ -3,7 +3,7 @@ Renderless component responsible for just loading the document and providing it 
 children Page components through the context API (key: svelte_pdf_current_doc)
  -->
 <script lang="ts" context="module">
-	import { getDocument, PDFWorker as _PDFWorker } from 'pdfjs-dist/lib/pdf.js';
+	import * as PDFJS from 'pdfjs-dist/lib/pdf.js';
 	import type {
 		DocumentInitParameters,
 		OnProgressParameters,
@@ -13,8 +13,8 @@ children Page components through the context API (key: svelte_pdf_current_doc)
 	import { createEventDispatcher, setContext } from 'svelte';
 	import { readable, writable } from 'svelte/store';
 
-	let PDFWorker = readable<_PDFWorker>(null, (set) => {
-		const worker = new _PDFWorker();
+	let PDFWorker = readable<PDFJS.PDFWorker>(null, (set) => {
+		const worker = new PDFJS.PDFWorker();
 		set(worker);
 		return () => worker.destroy();
 	});
@@ -55,7 +55,7 @@ children Page components through the context API (key: svelte_pdf_current_doc)
 		try {
 			loading_task?.destroy();
 			current_doc.set(null);
-			loading_task = getDocument({ url: file, worker: $PDFWorker, ...loadOptions });
+			loading_task = PDFJS.getDocument({ url: file, worker: $PDFWorker, ...loadOptions });
 			loading_task.onProgress = onProgress;
 			loading_task.promise.then((doc) => {
 				current_doc.set(doc);
