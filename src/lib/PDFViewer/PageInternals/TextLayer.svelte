@@ -1,19 +1,19 @@
 <script lang="ts">
 	import type { PDFPageProxy } from 'pdfjs-dist/types/src/display/api';
-	import * as PDFJS from 'pdfjs-dist';
+	import { renderTextLayer } from 'pdfjs-dist/lib/pdf.js';
 	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
 
 	export let page: PDFPageProxy;
 	export let viewport: PageViewport;
 
-	let renderTask: ReturnType<typeof PDFJS.renderTextLayer>;
+	let renderTask: ReturnType<typeof renderTextLayer>;
 	let container: HTMLDivElement;
 
 	async function render() {
 		const textContent = await page.getTextContent();
 		renderTask?.cancel();
 		container.innerHTML = '';
-		renderTask = PDFJS.renderTextLayer({
+		renderTask = renderTextLayer({
 			container,
 			textContent,
 			viewport,
