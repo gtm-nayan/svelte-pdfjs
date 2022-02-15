@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { Document, GlobalWorkerOptions, MultipleOf90, Page, preferThisHeight } from 'svelte-pdfjs';
+	import {
+		Document,
+		GlobalWorkerOptions,
+		type MultipleOf90,
+		Page,
+		preferThisHeight,
+	} from 'svelte-pdfjs';
 	import workerSrc from 'pdfjs-dist/build/pdf.worker.min.js?url';
 	import { browser } from '$app/env';
 
