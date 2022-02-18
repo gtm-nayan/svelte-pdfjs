@@ -10,12 +10,10 @@ Render a page from a PDF document. Must be a child of a `Document` component.
  -->
 <script context="module" lang="ts">
 	import type { MultipleOf90 } from '$lib/utils/target_dimension.js';
-	import type { PDFDocumentProxy, PDFPageProxy } from 'pdfjs-dist/types/src/display/api';
+	import type { PDFDocumentProxy, PDFPageProxy } from 'pdfjs-dist';
 	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
-	import { getContext, onMount } from 'svelte';
+	import { getContext, onDestroy } from 'svelte';
 	import type { Writable } from 'svelte/store';
-	import type PageCanvas from './PageInternals/PageCanvas.svelte';
-	import type PageSvg from './PageInternals/PageSVG.svelte';
 
 	function default_get_viewport(
 		page: PDFPageProxy,
@@ -26,6 +24,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 </script>
 
 <script lang="ts">
+	// #region props
 	/**
 	 * What renderer implementation to use for the page.
 	 * SVG rendering not implemented yet.
@@ -57,12 +56,9 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	 * Use this if you need something more complicated than the default based on scale.
 	 */
 	export let getViewport: (page: PDFPageProxy, rotation: MultipleOf90) => PageViewport = undefined;
+	// #endregion props
 
-	/* <========================================================================================> */
-
-	let InternalPageComponent: PageSvg | PageCanvas;
-
-	/* <========================================================================================> */
+	onDestroy(() => page?.cleanup())
 
 	const current_doc: Writable<PDFDocumentProxy> = getContext('svelte_pdf_current_doc');
 

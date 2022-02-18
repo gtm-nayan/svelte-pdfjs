@@ -6,14 +6,20 @@
 	export let page: PDFPageProxy;
 	export let viewport: PageViewport;
 
-	let renderTask: ReturnType<typeof PDFJS.renderTextLayer>;
+	let render_task: ReturnType<typeof PDFJS.renderTextLayer>;
 	let container: HTMLDivElement;
 
-	async function render() {
+	// Has to be concealed in a function to avoid infinite loops
+	function clear_container(_container: HTMLDivElement) {
+		_container.innerHTML = '';
+	}
+
+	async function render_text_layer() {
 		const textContent = await page.getTextContent();
-		renderTask?.cancel();
-		container.innerHTML = '';
-		renderTask = PDFJS.renderTextLayer({
+		render_task?.cancel();
+
+		clear_container(container);
+		render_task = PDFJS.renderTextLayer({
 			container,
 			textContent,
 			viewport,
@@ -21,7 +27,7 @@
 		});
 	}
 
-	$: if (viewport) render();
+	$: if (viewport && container) render_text_layer();
 </script>
 
 <div bind:this={container} />

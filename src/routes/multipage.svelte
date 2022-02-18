@@ -18,7 +18,7 @@
 	>
 		{#each Array(maxPages) as _, i}
 			<div>
-				<Page num={i + 1} getViewport={preferThisWidth(500)} />
+				<Page num={i + 1} getViewport={preferThisWidth(500)} renderTextLayer/>
 			</div>
 		{/each}
 	</Document>

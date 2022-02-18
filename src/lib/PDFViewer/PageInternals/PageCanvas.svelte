@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PDFPageProxy } from 'pdfjs-dist/types/src/display/api';
+	import type { PDFPageProxy, RenderTask } from 'pdfjs-dist';
 	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
 	import TextLayer from './TextLayer.svelte';
 
@@ -10,7 +10,7 @@
 	let page_div: HTMLDivElement;
 	let canvas: HTMLCanvasElement;
 
-	let render_task: ReturnType<PDFPageProxy['render']>;
+	let render_task: RenderTask;
 
 	async function render_page() {
 		canvas.width = viewport.width;
