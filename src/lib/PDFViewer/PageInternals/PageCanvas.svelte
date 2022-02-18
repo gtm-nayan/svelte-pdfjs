@@ -39,7 +39,7 @@
 
 <style>
 	div {
-		height: 500px;
+		position: relative;
 	}
 
 	canvas {

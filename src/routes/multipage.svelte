@@ -26,7 +26,6 @@
 
 <style>
 	div {
-		position: relative;
 		display: grid;
 		place-items: center;
 	}
