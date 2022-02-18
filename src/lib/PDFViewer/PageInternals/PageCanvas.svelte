@@ -27,7 +27,7 @@
 		});
 	}
 
-	$: if (viewport) render_page();
+	$: if (viewport && canvas) render_page();
 </script>
 
 <div bind:this={page_div}>
@@ -39,7 +39,7 @@
 
 <style>
 	div {
-		position: relative;
+		height: 500px;
 	}
 
 	canvas {
