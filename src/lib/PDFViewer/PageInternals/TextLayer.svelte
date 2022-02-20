@@ -10,11 +10,10 @@
 
 	function render_text_layer() {
 		render_task?.cancel();
-		const textContentStream = page.streamTextContent();
 		container.innerHTML = '';
 		render_task = PDFJS.renderTextLayer({
 			container,
-			textContentStream,
+			textContentStream: page.streamTextContent(),
 			viewport,
 		});
 	}
