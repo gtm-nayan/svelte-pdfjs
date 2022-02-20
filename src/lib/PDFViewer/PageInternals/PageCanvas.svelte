@@ -12,17 +12,22 @@
 
 	let render_task: RenderTask;
 
-	async function render_page() {
-		canvas.width = viewport.width;
-		canvas.height = viewport.height;
-		page_div.style.width = `${canvas.width}px`;
-		page_div.style.height = `${canvas.height}px`;
+	function set_dimesions(
+		_div: typeof page_div,
+		_canvas: typeof canvas,
+		_viewport: typeof viewport
+	) {
+		_div.style.width = `${(_canvas.width = _viewport.width)}px`;
+		_div.style.height = `${(_canvas.height = _viewport.height)}px`;
+	}
 
-		const canvasContext = canvas.getContext('2d');
+	function render_page() {
+		set_dimesions(page_div, canvas, viewport);
 
 		render_task?.cancel();
+
 		render_task = page.render({
-			canvasContext,
+			canvasContext: canvas.getContext('2d'),
 			viewport,
 		});
 	}
