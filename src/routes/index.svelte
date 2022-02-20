@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Document, MultipleOf90, Page, PDFJS, preferThisHeight } from 'svelte-pdfjs';
-	import workerSrc from 'pdfjs-dist/build/pdf.worker.min.js?url';
 	import { browser } from '$app/env';
+	import workerSrc from 'pdfjs-dist/build/pdf.worker.min.js?url';
+	import { Document, MultipleOf90, Page, PDFJS, preferThisHeight } from 'svelte-pdfjs';
 
 	if (PDFJS.GlobalWorkerOptions) {
 		PDFJS.GlobalWorkerOptions.workerSrc = workerSrc;
@@ -9,9 +9,9 @@
 	let scale: number = 1;
 	let num: number = 1;
 	let file = '/tackling-ts-preview-book.pdf';
-	let maxPages = 1;
+	let max_pages = 1;
 	let renderTextLayer: boolean;
-	let targetHeight = 500;
+	let target_height = 500;
 	let rotation: MultipleOf90 = 0;
 
 	const handleSelect = (e) => {
@@ -21,14 +21,14 @@
 
 <section class="settings">
 	<input type="range" step="0.25" max="4" min="1" bind:value={scale} />
-	<input type="number" bind:value={num} step="1" min="1" max={maxPages} />
+	<input type="number" bind:value={num} step="1" min="1" max={max_pages} />
 
 	<input type="radio" value="/tackling-ts-preview-book.pdf" bind:group={file} /> Doc 1
 	<input type="radio" value="/impatient-js-preview-book.pdf" bind:group={file} /> Doc 2
 	<input type="radio" bind:group={file} value="/yadayada.pdf" /> Doc 3 (doesn't exist)
 
 	<input type="checkbox" bind:checked={renderTextLayer} /> Render text layer
-	<input type="range" step="20" max="700" min="300" bind:value={targetHeight} />
+	<input type="range" step="20" max="700" min="300" bind:value={target_height} />
 	<select on:change={handleSelect}>
 		<option>0</option>
 		<option>90</option>
@@ -40,7 +40,7 @@
 {#if browser}
 	<Document
 		{file}
-		on:loadsuccess={(e) => console.log((maxPages = e.detail.numPages))}
+		on:loadsuccess={(e) => console.log((max_pages = e.detail.numPages))}
 		on:loaderror={console.log}
 	>
 		<div>
@@ -49,7 +49,7 @@
 				{num}
 				{renderTextLayer}
 				{rotation}
-				getViewport={preferThisHeight(targetHeight)}
+				getViewport={preferThisHeight(target_height)}
 			/>
 		</div>
 	</Document>

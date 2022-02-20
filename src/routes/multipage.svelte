@@ -7,18 +7,18 @@
 		PDFJS.GlobalWorkerOptions.workerSrc = workerSrc;
 	}
 
-	let maxPages: number = 0;
+	let max_pages: number = 0;
 </script>
 
 {#if browser}
 	<Document
 		file="/tackling-ts-preview-book.pdf"
-		on:loadsuccess={(e) => console.log((maxPages = e.detail.numPages))}
+		on:loadsuccess={(e) => console.log((max_pages = e.detail.numPages))}
 		on:loaderror={console.log}
 	>
-		{#each Array(maxPages) as _, i}
+		{#each Array(max_pages) as _, i}
 			<div>
-				<Page num={i + 1} getViewport={preferThisWidth(500)} renderTextLayer/>
+				<Page num={i + 1} getViewport={preferThisWidth(500)} renderTextLayer />
 			</div>
 		{/each}
 	</Document>
