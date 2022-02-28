@@ -12,6 +12,7 @@
 		"package": "svelte-kit package"
 	},
 	"devDependencies": {
+		"@changesets/cli": "^2.21.0",
 		"@sveltejs/adapter-netlify": "^1.0.0-next.44",
 		"@sveltejs/kit": "next",
 		"@typescript-eslint/eslint-plugin": "^4.33.0",
