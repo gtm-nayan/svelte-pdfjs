@@ -13,10 +13,10 @@
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.21.0",
-		"@sveltejs/adapter-netlify": "^1.0.0-next.48",
+		"@sveltejs/adapter-netlify": "^1.0.0-next.49",
 		"@sveltejs/kit": "next",
-		"@typescript-eslint/eslint-plugin": "^4.33.0",
-		"@typescript-eslint/parser": "^4.33.0",
+		"@typescript-eslint/eslint-plugin": "^5.13.0",
+		"@typescript-eslint/parser": "^5.13.0",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.4.0",
 		"eslint-plugin-svelte3": "^3.4.1",
@@ -25,9 +25,9 @@
 		"svelte": "^3.46.4",
 		"svelte-check": "^2.4.5",
 		"svelte-preprocess": "^4.10.4",
-		"svelte2tsx": "^0.4.14",
+		"svelte2tsx": "^0.5.5",
 		"tslib": "^2.3.1",
-		"typescript": "^4.5.5"
+		"typescript": "^4.6.2"
 	},
 	"dependencies": {
 		"pdfjs-dist": "^2.13.216"
