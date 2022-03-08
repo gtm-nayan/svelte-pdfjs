@@ -9,7 +9,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	when their dependencies change.
  -->
 <script context="module" lang="ts">
-	import type { MultipleOf90 } from '$lib/utils/target_dimension.js';
+	import type { CalcViewport, MultipleOf90 } from '$lib/utils/target_dimension.js';
 	import type { PDFDocumentProxy, PDFPageProxy } from 'pdfjs-dist';
 	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
 	import { getContext, onDestroy } from 'svelte';
@@ -55,7 +55,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	 * A callback invoked with the current page used to determine the viewport.
 	 * Use this if you need something more complicated than the default based on scale.
 	 */
-	export let getViewport: (page: PDFPageProxy, rotation: MultipleOf90) => PageViewport = undefined;
+	export let getViewport: CalcViewport = undefined;
 	// #endregion props
 
 	onDestroy(() => page?.cleanup())

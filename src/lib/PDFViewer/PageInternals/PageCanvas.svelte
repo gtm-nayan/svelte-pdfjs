@@ -7,25 +7,12 @@
 	export let viewport: PageViewport;
 	export let render_text_layer: boolean;
 
-	let page_div: HTMLDivElement;
 	let canvas: HTMLCanvasElement;
 
 	let render_task: RenderTask;
 
-	function set_dimesions(
-		_div: typeof page_div,
-		_canvas: typeof canvas,
-		_viewport: typeof viewport
-	) {
-		_div.style.width = `${(_canvas.width = _viewport.width)}px`;
-		_div.style.height = `${(_canvas.height = _viewport.height)}px`;
-	}
-
 	function render_page() {
-		set_dimesions(page_div, canvas, viewport);
-
 		render_task?.cancel();
-
 		render_task = page.render({
 			canvasContext: canvas.getContext('2d'),
 			viewport,
@@ -35,8 +22,8 @@
 	$: if (viewport && canvas) render_page();
 </script>
 
-<div bind:this={page_div}>
-	<canvas bind:this={canvas} />
+<div style:--spw={viewport?.width} style:--sph={viewport?.height}>
+	<canvas bind:this={canvas} width={viewport?.width} height={viewport?.height} />
 	{#if render_text_layer}
 		<TextLayer {page} {viewport} />
 	{/if}
@@ -45,6 +32,8 @@
 <style>
 	div {
 		position: relative;
+		height: calc(var(--sph) * 1px);
+		width: calc(var(--spw) * 1px);
 	}
 
 	canvas {
