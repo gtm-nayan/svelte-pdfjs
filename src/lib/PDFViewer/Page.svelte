@@ -14,6 +14,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
 	import { getContext, onDestroy } from 'svelte';
 	import type { Writable } from 'svelte/store';
+	import { key } from './Document.svelte';
 
 	function default_get_viewport(
 		page: PDFPageProxy,
@@ -58,9 +59,9 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	export let getViewport: CalcViewport = undefined;
 	// #endregion props
 
-	onDestroy(() => page?.cleanup())
+	onDestroy(() => page?.cleanup());
 
-	const current_doc: Writable<PDFDocumentProxy> = getContext('svelte_pdf_current_doc');
+	const current_doc: Writable<PDFDocumentProxy> = getContext(key);
 
 	let page: PDFPageProxy;
 	let viewport: PageViewport;

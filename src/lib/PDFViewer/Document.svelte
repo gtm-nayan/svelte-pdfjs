@@ -12,11 +12,14 @@ children Page components through the context API (key: svelte_pdf_current_doc)
 	} from 'pdfjs-dist/types/src/display/api';
 	import { createEventDispatcher, setContext } from 'svelte';
 	import { readable, writable } from 'svelte/store';
-	let PDFWorker = readable<PDFJS.PDFWorker>(null, (set) => {
+
+	const PDFWorker = readable<PDFJS.PDFWorker>(null, (set) => {
 		const worker = new PDFJS.PDFWorker();
 		set(worker);
 		return () => worker.destroy();
 	});
+
+	export const key = Symbol.for('current_doc');
 </script>
 
 <script lang="ts">
@@ -47,7 +50,7 @@ children Page components through the context API (key: svelte_pdf_current_doc)
 
 	let current_doc = writable<PDFDocumentProxy>(null);
 	let loading_task: PDFDocumentLoadingTask;
-	setContext('svelte_pdf_current_doc', current_doc);
+	setContext(key, current_doc);
 
 	function load_document() {
 		const prev_doc = $current_doc;
