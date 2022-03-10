@@ -50,21 +50,27 @@ children Page components through the context API (key: svelte_pdf_current_doc)
 	setContext('svelte_pdf_current_doc', current_doc);
 
 	function load_document() {
-		const previous_doc = $current_doc;
-		try {
-			loading_task?.destroy();
-			current_doc.set(null);
-			loading_task = PDFJS.getDocument({ url: file, worker: $PDFWorker, ...loadOptions });
-			loading_task.onProgress = onProgress;
-			loading_task.promise.then((doc) => {
-				current_doc.set(doc);
-				dispatch('loadsuccess', doc);
-			});
-		} catch (err) {
-			current_doc.set(previous_doc);
-			dispatch('loaderror', err);
-		}
-		/** @todo Handle errors and stuff */
+		const prev_doc = $current_doc;
+		const prev_loading_task = loading_task;
+
+		current_doc.set(null);
+
+		loading_task = PDFJS.getDocument({ url: file, worker: $PDFWorker, ...loadOptions });
+		loading_task.onProgress = onProgress;
+		loading_task.promise
+			.then(
+				(doc) => {
+					prev_loading_task?.destroy();
+					prev_doc?.cleanup();
+					dispatch('loadsuccess', doc);
+					return doc;
+				},
+				(err) => {
+					dispatch('loaderror', err);
+					return prev_doc;
+				}
+			)
+			.then(current_doc.set);
 	}
 	$: file, loadOptions, load_document();
 </script>
