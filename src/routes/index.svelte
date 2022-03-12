@@ -7,13 +7,14 @@
 		PDFJS.GlobalWorkerOptions.workerSrc = workerSrc;
 	}
 
-	let scale: number = 1;
-	let num: number = 1;
+	let scale = 1;
+	let num = 1;
 	let file = '/tackling-ts-preview-book.pdf';
 	let max_pages = 1;
-	let renderTextLayer: boolean;
+	let renderTextLayer = false;
 	let target_height = 500;
 	let rotation: MultipleOf90 = 0;
+	let show = true;
 
 	const handleSelect = (e) => {
 		rotation = parseInt(e.currentTarget.value) as MultipleOf90;
@@ -36,9 +37,10 @@
 		<option>180</option>
 		<option>270</option>
 	</select>
+	<input type="checkbox" bind:checked={show} />
 </section>
 
-{#if browser}
+{#if show && browser}
 	<Document
 		{file}
 		on:loadsuccess={(e) => console.log((max_pages = e.detail.numPages))}

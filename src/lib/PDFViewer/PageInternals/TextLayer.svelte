@@ -8,10 +8,9 @@
 	let render_task: ReturnType<typeof PDFJS.renderTextLayer>;
 	let container: HTMLDivElement;
 
-	// Passing container into the function will prevent svelte from creating an invalidate call
-	function render_text_layer(_container: typeof container) {
+	function render_text_layer() {
 		render_task?.cancel();
-		_container.innerHTML = '';
+		while (container.firstChild) container.firstChild.remove();
 		render_task = PDFJS.renderTextLayer({
 			container,
 			textContentStream: page.streamTextContent(),
@@ -19,7 +18,7 @@
 		});
 	}
 
-	$: if (container && viewport) render_text_layer(container);
+	$: if (container && viewport) render_text_layer();
 </script>
 
 <div bind:this={container} />

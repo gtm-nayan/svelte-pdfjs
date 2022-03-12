@@ -16,7 +16,7 @@ children Page components through the context API.
 	const PDFWorker = readable<PDFJS.PDFWorker>(null, (set) => {
 		const worker = new PDFJS.PDFWorker();
 		set(worker);
-		return () => worker.destroy();
+		return worker.destroy.bind(worker);
 	});
 
 	export const key = Symbol.for('current_doc');
@@ -26,18 +26,13 @@ children Page components through the context API.
 	const dispatch = createEventDispatcher();
 
 	interface $$Events {
-		/**
-		 * Dispatched when a document is successfully loaded.
-		 */
+		/** Dispatched when a document is successfully loaded. */
 		loadsuccess: CustomEvent<PDFDocumentProxy>;
-		/**
-		 * Dispatched when there's an error while loading the document.
-		 */
+		/** Dispatched when there's an error while loading the document. */
 		loaderror: CustomEvent<any>;
 	}
-	/**
-	 * The URL of the file to load.
-	 */
+
+	/** The URL of the file to load. */
 	export let file: string | URL = undefined;
 	/**
 	 * Extra options provided to PDFJS.getDocument. [See](https://github.com/mozilla/pdf.js/blob/41dab8e7b6c1e2684d4afabb8f02e40a874d8e85/src/display/api.js#L126)
