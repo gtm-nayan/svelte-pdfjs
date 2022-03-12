@@ -10,7 +10,7 @@ children Page components through the context API.
 		PDFDocumentLoadingTask,
 		PDFDocumentProxy,
 	} from 'pdfjs-dist/types/src/display/api';
-	import { createEventDispatcher, setContext } from 'svelte';
+	import { createEventDispatcher, onDestroy, setContext } from 'svelte';
 	import { readable, writable } from 'svelte/store';
 
 	const PDFWorker = readable<PDFJS.PDFWorker>(null, (set) => {
@@ -52,9 +52,13 @@ children Page components through the context API.
 	let loading_task: PDFDocumentLoadingTask;
 	setContext(key, current_doc);
 
+	onDestroy(() => {
+		$current_doc?.destroy();
+		$current_doc?.cleanup(false);
+	});
+
 	function load_document() {
 		const prev_doc = $current_doc;
-		const prev_loading_task = loading_task;
 
 		current_doc.set(null);
 
@@ -63,7 +67,7 @@ children Page components through the context API.
 		loading_task.promise
 			.then(
 				(doc) => {
-					prev_loading_task?.destroy();
+					prev_doc?.destroy();
 					prev_doc?.cleanup();
 					dispatch('loadsuccess', doc);
 					return doc;

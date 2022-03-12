@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { browser } from '$app/env';
 	import workerSrc from 'pdfjs-dist/build/pdf.worker.min.js?url';
-	import { Document, MultipleOf90, Page, PDFJS, preferThisHeight } from 'svelte-pdfjs';
+	import { Document, type MultipleOf90, Page, PDFJS, preferThisHeight } from 'svelte-pdfjs';
 
 	if (PDFJS.GlobalWorkerOptions) {
 		PDFJS.GlobalWorkerOptions.workerSrc = workerSrc;
 	}
+
 	let scale: number = 1;
 	let num: number = 1;
 	let file = '/tackling-ts-preview-book.pdf';
