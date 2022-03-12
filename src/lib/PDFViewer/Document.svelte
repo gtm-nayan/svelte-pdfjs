@@ -1,6 +1,6 @@
 <!-- @component
 Renderless component responsible for just loading the document and providing it to
-children Page components through the context API (key: svelte_pdf_current_doc)
+children Page components through the context API.
  -->
 <script lang="ts" context="module">
 	import * as PDFJS from 'pdfjs-dist';
@@ -33,14 +33,14 @@ children Page components through the context API (key: svelte_pdf_current_doc)
 		/**
 		 * Dispatched when there's an error while loading the document.
 		 */
-		loaderror: CustomEvent<Error>;
+		loaderror: CustomEvent<any>;
 	}
 	/**
 	 * The URL of the file to load.
 	 */
 	export let file: string | URL = undefined;
 	/**
-	 * Extra options provided to PDFJS.getDocument. [See 🔗](https://github.com/mozilla/pdf.js/blob/41dab8e7b6c1e2684d4afabb8f02e40a874d8e85/src/display/api.js#L126)
+	 * Extra options provided to PDFJS.getDocument. [See](https://github.com/mozilla/pdf.js/blob/41dab8e7b6c1e2684d4afabb8f02e40a874d8e85/src/display/api.js#L126)
 	 */
 	export let loadOptions: DocumentInitParameters = undefined;
 	/**
@@ -48,7 +48,7 @@ children Page components through the context API (key: svelte_pdf_current_doc)
 	 */
 	export let onProgress: (params: OnProgressParameters) => void = undefined;
 
-	let current_doc = writable<PDFDocumentProxy>(null);
+	let current_doc = writable<PDFDocumentProxy>();
 	let loading_task: PDFDocumentLoadingTask;
 	setContext(key, current_doc);
 
