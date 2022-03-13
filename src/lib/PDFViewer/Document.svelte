@@ -16,7 +16,7 @@ children Page components through the context API.
 	const PDFWorker = readable<PDFJS.PDFWorker>(null, (set) => {
 		const worker = new PDFJS.PDFWorker();
 		set(worker);
-		return worker.destroy.bind(worker);
+		return () => worker.destroy();
 	});
 
 	export const key = Symbol.for('current_doc');
