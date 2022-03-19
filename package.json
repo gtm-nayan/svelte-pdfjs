@@ -32,5 +32,16 @@
 	"dependencies": {
 		"pdfjs-dist": "^2.13.216"
 	},
-	"type": "module"
+	"type": "module",
+	"license": "MIT",
+	"keywords": [
+		"svelte",
+		"pdf",
+		"pdfjs",
+		"pdf.js"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+git://github.com/gtm-nayan/svelte-pdfjs.git"
+	}
 }
