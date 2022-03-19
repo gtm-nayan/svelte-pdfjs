@@ -12,7 +12,7 @@
 	let render_task: RenderTask;
 
 	function render_page() {
-		render_task?.cancel();
+		if (render_task?._internalRenderTask.running) render_task.cancel();
 		render_task = page.render({
 			canvasContext: canvas.getContext('2d'),
 			viewport,
