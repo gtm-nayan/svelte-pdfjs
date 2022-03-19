@@ -42,6 +42,9 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+git://github.com/gtm-nayan/svelte-pdfjs.git"
+		"url": "https://github.com/gtm-nayan/svelte-pdfjs.git"
+	},
+	"bugs": {
+		"url": "https://github.com/gtm-nayan/svelte-pdfjs/issues"
 	}
 }
