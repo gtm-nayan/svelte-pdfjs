@@ -15,13 +15,6 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	import { getContext, onDestroy } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import { key } from './Document.svelte';
-
-	function default_get_viewport(
-		page: PDFPageProxy,
-		options: { scale: number; rotation: MultipleOf90 }
-	): PageViewport {
-		return page.getViewport(options);
-	}
 </script>
 
 <script lang="ts">
@@ -70,7 +63,8 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 
 	$: if ($current_doc) $current_doc.getPage(num).then((p) => (page = p));
 
-	$: _get_viewport = getViewport ?? ((p) => default_get_viewport(p, { scale, rotation }));
+	let _get_viewport: CalcViewport;
+	$: _get_viewport = getViewport ?? ((p, r) => p.getViewport({ scale, rotation: r }));
 
 	$: if (page) viewport = _get_viewport(page, rotation);
 </script>
