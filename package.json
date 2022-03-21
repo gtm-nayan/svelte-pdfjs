@@ -32,5 +32,8 @@
 	"dependencies": {
 		"pdfjs-dist": "^2.13.216"
 	},
+	"engines": {
+		"node": ">=16.0.0"
+	},
 	"type": "module"
 }
