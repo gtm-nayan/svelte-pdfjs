@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/env';
+	// https://vitejs.dev/guide/assets.html#explicit-url-imports
 	import workerSrc from 'pdfjs-dist/build/pdf.worker.min.js?url';
 	import { Document, type MultipleOf90, Page, PDFJS, preferThisHeight } from 'svelte-pdfjs';
 
