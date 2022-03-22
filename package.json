@@ -15,22 +15,25 @@
 		"@changesets/cli": "^2.21.1",
 		"@sveltejs/adapter-netlify": "^1.0.0-next.50",
 		"@sveltejs/kit": "next",
-		"@typescript-eslint/eslint-plugin": "^5.14.0",
-		"@typescript-eslint/parser": "^5.14.0",
-		"eslint": "^7.32.0",
+		"@typescript-eslint/eslint-plugin": "^5.15.0",
+		"@typescript-eslint/parser": "^5.15.0",
+		"eslint": "^8.11.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^3.4.1",
-		"prettier": "^2.5.1",
+		"prettier": "^2.6.0",
 		"prettier-plugin-svelte": "^2.6.0",
 		"svelte": "^3.46.4",
-		"svelte-check": "^2.4.5",
+		"svelte-check": "^2.4.6",
 		"svelte-preprocess": "^4.10.4",
-		"svelte2tsx": "^0.5.5",
+		"svelte2tsx": "^0.5.6",
 		"tslib": "^2.3.1",
 		"typescript": "^4.6.2"
 	},
 	"dependencies": {
 		"pdfjs-dist": "^2.13.216"
+	},
+	"engines": {
+		"node": ">=16.0.0"
 	},
 	"type": "module"
 }
