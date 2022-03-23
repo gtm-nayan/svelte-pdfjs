@@ -15,10 +15,6 @@
 	let target_height = 500;
 	let rotation: MultipleOf90 = 0;
 	let show = true;
-
-	const handleSelect = (e) => {
-		rotation = parseInt(e.currentTarget.value) as MultipleOf90;
-	};
 </script>
 
 <section class="settings">
@@ -31,7 +27,13 @@
 
 	<input type="checkbox" bind:checked={renderTextLayer} /> Render text layer
 	<input type="range" step="20" max="700" min="300" bind:value={target_height} />
-	<select on:change={handleSelect}>
+
+	<select
+		on:change={(e) => {
+			// @ts-expect-error can't narrow type in the markup
+			rotation = parseInt(e.currentTarget.value);
+		}}
+	>
 		<option>0</option>
 		<option>90</option>
 		<option>180</option>

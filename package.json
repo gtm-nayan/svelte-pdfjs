@@ -35,5 +35,19 @@
 	"engines": {
 		"node": ">=16.0.0"
 	},
-	"type": "module"
+	"type": "module",
+	"license": "MIT",
+	"keywords": [
+		"svelte",
+		"pdf",
+		"pdfjs",
+		"pdf.js"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/gtm-nayan/svelte-pdfjs.git"
+	},
+	"bugs": {
+		"url": "https://github.com/gtm-nayan/svelte-pdfjs/issues"
+	}
 }
