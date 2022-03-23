@@ -69,7 +69,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	$: if (page) viewport = _get_viewport(page, rotation);
 </script>
 
-{#await renderer === 'canvas' ? import('./PageInternals/PageCanvas.svelte') : null then { default: p }}
+{#await renderer === 'canvas' ? import('./PageInternals/PageCanvas.svelte') : Promise.reject('SVG rendering not implemented yet.') then { default: p }}
 	<svelte:component
 		this={p}
 		{page}
