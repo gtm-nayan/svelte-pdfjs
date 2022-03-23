@@ -1,5 +1,11 @@
 # svelte-pdfjs
 
+## 0.3.14
+
+### Patch Changes
+
+- 05d341a: fix "tried to restore ctx..." warning
+
 ## 0.3.13
 
 ### Patch Changes
