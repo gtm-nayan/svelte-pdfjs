@@ -4,6 +4,9 @@
 	import { Document, type MultipleOf90, Page, PDFJS, preferThisHeight } from 'svelte-pdfjs';
 
 	if (PDFJS.GlobalWorkerOptions) {
+		// A CDN-hosted worker is already available by default
+		// but you can specify a custom worker script URL.
+		// Also see https://vitejs.dev/guide/assets.html#explicit-url-imports
 		PDFJS.GlobalWorkerOptions.workerSrc = workerSrc;
 	}
 
