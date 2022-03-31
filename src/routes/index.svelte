@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/env';
+	import { base } from '$app/paths';
 	import workerSrc from 'pdfjs-dist/build/pdf.worker.min.js?url';
 	import { Document, type MultipleOf90, Page, PDFJS, preferThisHeight } from 'svelte-pdfjs';
 
@@ -47,7 +48,7 @@
 
 {#if show && browser}
 	<Document
-		{file}
+		file="{base}{file}"
 		on:loadsuccess={(e) => console.log((max_pages = e.detail.numPages))}
 		on:loaderror={console.log}
 	>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/env';
+	import { base } from '$app/paths';
 	import workerSrc from 'pdfjs-dist/build/pdf.worker.min.js?url';
 	import { Document, Page, PDFJS, preferThisWidth } from 'svelte-pdfjs';
 
@@ -12,7 +13,7 @@
 
 {#if browser}
 	<Document
-		file="/tackling-ts-preview-book.pdf"
+		file="{base}/tackling-ts-preview-book.pdf"
 		on:loadsuccess={(e) => console.log((max_pages = e.detail.numPages))}
 		on:loaderror={console.log}
 	>
