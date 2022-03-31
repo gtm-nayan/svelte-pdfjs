@@ -1,5 +1,5 @@
 import preprocess from 'svelte-preprocess';
-import { default as adapter } from '@sveltejs/adapter-netlify';
+import { default as adapter } from '@sveltejs/adapter-static';
 import path from 'path';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -9,13 +9,24 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
-		adapter: adapter(),
+		adapter: adapter({
+			precompress: true,
+		}),
 		vite: {
 			resolve: {
 				alias: {
 					'svelte-pdfjs': path.resolve('src/lib'),
 				},
 			},
+		},
+		prerender: {
+			default: true,
+		},
+		browser: {
+			router: false,
+		},
+		paths: {
+			base: process.env.BASE_PATH,
 		},
 	},
 };
