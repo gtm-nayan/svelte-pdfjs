@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PDFPageProxy, RenderTask } from 'pdfjs-dist';
 	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
-	import { afterUpdate } from 'svelte';
+	import { tick } from 'svelte';
 	import TextLayer from './TextLayer.svelte';
 
 	export let page: PDFPageProxy;
@@ -20,7 +20,7 @@
 		});
 	}
 
-	$: if (viewport && canvas) afterUpdate(render_page);
+	$: if (viewport && canvas) tick().then(render_page);
 </script>
 
 <div>
