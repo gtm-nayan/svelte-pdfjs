@@ -1,8 +1,9 @@
 <script lang="ts">
 	import * as PDFJS from 'pdfjs-dist';
+	import type { PDFPageProxy } from 'pdfjs-dist/types/src/display/api';
 	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
 
-	export let page: PDFJS.PDFPageProxy;
+	export let page: PDFPageProxy;
 	export let viewport: PageViewport;
 
 	let render_task: ReturnType<typeof PDFJS.renderTextLayer>;
@@ -27,7 +28,7 @@
 	div {
 		position: absolute;
 		inset: 0;
-		overflow: hidden;
+		overflow: clip;
 		opacity: 0.2;
 		line-height: 1;
 	}

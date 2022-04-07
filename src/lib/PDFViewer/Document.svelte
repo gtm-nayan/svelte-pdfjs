@@ -35,7 +35,8 @@ children Page components through the context API.
 	/** The URL of the file to load. */
 	export let file: string | URL = undefined;
 	/**
-	 * Extra options provided to PDFJS.getDocument. [See](https://github.com/mozilla/pdf.js/blob/41dab8e7b6c1e2684d4afabb8f02e40a874d8e85/src/display/api.js#L126)
+	 * Extra options provided to PDFJS.getDocument. 
+	 * @see https://github.com/mozilla/pdf.js/blob/41dab8e7b6c1e2684d4afabb8f02e40a874d8e85/src/display/api.js#L126
 	 */
 	export let loadOptions: DocumentInitParameters = undefined;
 	/**

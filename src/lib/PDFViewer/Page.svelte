@@ -61,7 +61,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 
 	/* <========================================================================================> */
 
-	$: if ($current_doc) $current_doc.getPage(num).then((p) => (page = p));
+	$: $current_doc?.getPage(num).then((p) => (page = p));
 
 	let _get_viewport: CalcViewport;
 	$: _get_viewport = getViewport ?? ((p, r) => p.getViewport({ scale, rotation: r }));

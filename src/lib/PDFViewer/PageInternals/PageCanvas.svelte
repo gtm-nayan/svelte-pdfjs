@@ -22,7 +22,7 @@
 	$: if (viewport && canvas) render_page();
 </script>
 
-<div style:--spw={viewport?.width} style:--sph={viewport?.height}>
+<div>
 	<canvas bind:this={canvas} width={viewport?.width} height={viewport?.height} />
 	{#if render_text_layer}
 		<TextLayer {page} {viewport} />
@@ -32,13 +32,11 @@
 <style>
 	div {
 		position: relative;
-		height: calc(var(--sph) * 1px);
-		width: calc(var(--spw) * 1px);
+		padding: 0;
 	}
 
 	canvas {
-		position: absolute;
-		top: 0;
-		left: 0;
+		display: block;
+		margin: 0;
 	}
 </style>
