@@ -5,7 +5,7 @@ A wrapper around Mozilla's PDFJS renderer. Only cares about loading and showing 
 ## Usage
 
 See [src/routes/index.svelte](src/routes/index.svelte)  
-Demo: [Netlify](https://svelte-pdfjs.netlify.app)
+[Demo](https://gtm-nayan.github.io/svelte-pdfjs)
 
 ## SvelteKit
 
