@@ -61,6 +61,10 @@
 </section>
 
 {#if browser}
+	<!-- {base}/ isn't neceassary if your app lives at the root of your host. 
+	---- However we're serving this demo through github pages so the pdfs will
+	---- be at /svelte-pdfjs/filename.pdf
+	-->
 	<Document
 		file="{base}/{filename}"
 		loadOptions={{ docBaseUrl: base }}
