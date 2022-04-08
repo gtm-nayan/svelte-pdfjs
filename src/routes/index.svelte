@@ -13,7 +13,7 @@
 
 	let scale = 1;
 	let num = 1;
-	let file = '/tackling-ts-preview-book.pdf';
+	let filename = '/tackling-ts-preview-book.pdf';
 	let max_pages = 1;
 	let renderTextLayer = false;
 	let target_height = 500;
@@ -25,9 +25,11 @@
 <section class="settings">
 	<input type="number" bind:value={num} step="1" min="1" max={max_pages} />
 
-	<input type="radio" value="/tackling-ts-preview-book.pdf" bind:group={file} /> Doc 1
-	<input type="radio" value="/impatient-js-preview-book.pdf" bind:group={file} /> Doc 2
-	<input type="radio" bind:group={file} value="/yadayada.pdf" /> Doc 3 (doesn't exist)
+	<select bind:value={filename}>
+		<option>tackling-ts-preview-book.pdf</option>
+		<option>impatient-js-preview-book.pdf</option>
+		<option value="a.pdf">non existent file</option>
+	</select>
 
 	<input type="checkbox" bind:checked={renderTextLayer} /> Render text layer
 
@@ -60,7 +62,7 @@
 
 {#if browser}
 	<Document
-		{file}
+		file="{base}/{filename}"
 		loadOptions={{ docBaseUrl: base }}
 		on:loadsuccess={(e) => console.log((max_pages = e.detail.numPages))}
 		on:loaderror={console.log}
