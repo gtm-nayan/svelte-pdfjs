@@ -1,5 +1,11 @@
 # svelte-pdfjs
 
+## 0.3.15
+
+### Patch Changes
+
+- refactor pagecanvas styles
+
 ## 0.3.14
 
 ### Patch Changes
