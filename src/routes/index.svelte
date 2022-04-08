@@ -13,7 +13,7 @@
 
 	let scale = 1;
 	let num = 1;
-	let filename = '/tackling-ts-preview-book.pdf';
+	let filename = 'tackling-ts-preview-book.pdf';
 	let max_pages = 1;
 	let renderTextLayer = false;
 	let target_height = 500;
@@ -23,7 +23,7 @@
 </script>
 
 <section class="settings">
-	<input type="number" bind:value={num} step="1" min="1" max={max_pages} />
+	Page <input type="number" bind:value={num} step="1" min="1" max={max_pages} /> of {max_pages}
 
 	<select bind:value={filename}>
 		<option>tackling-ts-preview-book.pdf</option>
@@ -64,8 +64,11 @@
 	<Document
 		file="{base}/{filename}"
 		loadOptions={{ docBaseUrl: base }}
-		on:loadsuccess={(e) => console.log((max_pages = e.detail.numPages))}
-		on:loaderror={console.log}
+		on:loadsuccess={(e) => {
+			max_pages = e.detail.numPages;
+			num = Math.min(num, max_pages);
+		}}
+		on:loaderror={(e) => alert(e.detail + '')}
 	>
 		<div>
 			<Page
