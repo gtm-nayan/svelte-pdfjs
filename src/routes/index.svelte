@@ -18,11 +18,11 @@
 	let renderTextLayer = false;
 	let target_height = 500;
 	let rotation: MultipleOf90 = 0;
-	let show = true;
+
+	let sizing = 1;
 </script>
 
 <section class="settings">
-	<input type="range" step="0.25" max="4" min="1" bind:value={scale} />
 	<input type="number" bind:value={num} step="1" min="1" max={max_pages} />
 
 	<input type="radio" value="/tackling-ts-preview-book.pdf" bind:group={file} /> Doc 1
@@ -30,25 +30,38 @@
 	<input type="radio" bind:group={file} value="/yadayada.pdf" /> Doc 3 (doesn't exist)
 
 	<input type="checkbox" bind:checked={renderTextLayer} /> Render text layer
-	<input type="range" step="20" max="700" min="300" bind:value={target_height} />
 
-	<select
-		on:change={(e) => {
-			// @ts-expect-error can't narrow type in the markup
-			rotation = parseInt(e.currentTarget.value);
-		}}
-	>
-		<option>0</option>
-		<option>90</option>
-		<option>180</option>
-		<option>270</option>
-	</select>
-	<input type="checkbox" bind:checked={show} />
+	<fieldset>
+		<legend>Dimensions</legend>
+		<select bind:value={sizing}>
+			<option value={1}>Scale: {scale}x</option>
+			<option value={2}>
+				Fixed height: {target_height}px
+			</option>
+		</select>
+
+		{#if sizing === 2}
+			<input type="range" bind:value={target_height} min="200" max="700" step="50" />
+		{:else}
+			<input type="range" bind:value={scale} min="0.5" max="4" step="0.25" />
+		{/if}
+
+		<label>
+			Rotation
+			<select bind:value={rotation}>
+				<option>0</option>
+				<option>90</option>
+				<option>180</option>
+				<option>270</option>
+			</select>
+		</label>
+	</fieldset>
 </section>
 
-{#if show && browser}
+{#if browser}
 	<Document
-		file="{base}{file}"
+		{file}
+		loadOptions={{ docBaseUrl: base }}
 		on:loadsuccess={(e) => console.log((max_pages = e.detail.numPages))}
 		on:loaderror={console.log}
 	>
@@ -58,7 +71,7 @@
 				{num}
 				{renderTextLayer}
 				{rotation}
-				getViewport={preferThisHeight(target_height)}
+				getViewport={sizing === 1 ? undefined : preferThisHeight(target_height)}
 			/>
 		</div>
 	</Document>

@@ -13,7 +13,8 @@
 
 {#if browser}
 	<Document
-		file="{base}/tackling-ts-preview-book.pdf"
+		file="/tackling-ts-preview-book.pdf"
+		loadOptions={{ docBaseUrl: base }}
 		on:loadsuccess={(e) => console.log((max_pages = e.detail.numPages))}
 		on:loaderror={console.log}
 	>
