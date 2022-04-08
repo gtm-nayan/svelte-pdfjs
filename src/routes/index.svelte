@@ -2,7 +2,7 @@
 	import { browser } from '$app/env';
 	import { base } from '$app/paths';
 	import workerSrc from 'pdfjs-dist/build/pdf.worker.min.js?url';
-	import { Document, type MultipleOf90, Page, PDFJS, preferThisHeight } from 'svelte-pdfjs';
+	import { Document, Page, PDFJS, preferThisHeight, type MultipleOf90 } from 'svelte-pdfjs';
 
 	if (PDFJS.GlobalWorkerOptions) {
 		// A CDN-hosted worker is already available by default
