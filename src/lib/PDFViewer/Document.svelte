@@ -11,13 +11,8 @@ children Page components through the context API.
 		PDFDocumentProxy,
 	} from 'pdfjs-dist/types/src/display/api';
 	import { createEventDispatcher, onDestroy, setContext } from 'svelte';
-	import { readable, writable } from 'svelte/store';
-
-	const PDFWorker = readable<PDFJS.PDFWorker>(null, (set) => {
-		const worker = new PDFJS.PDFWorker();
-		set(worker);
-		return () => worker.destroy();
-	});
+	import { PDFWorker } from 'svelte-pdfjs/utils/worker';
+	import { writable } from 'svelte/store';
 
 	export const key = Symbol.for('current_doc');
 </script>
@@ -35,7 +30,7 @@ children Page components through the context API.
 	/** The URL of the file to load. */
 	export let file: string | URL = undefined;
 	/**
-	 * Extra options provided to PDFJS.getDocument. 
+	 * Extra options provided to PDFJS.getDocument.
 	 * @see https://github.com/mozilla/pdf.js/blob/41dab8e7b6c1e2684d4afabb8f02e40a874d8e85/src/display/api.js#L126
 	 */
 	export let loadOptions: DocumentInitParameters = undefined;

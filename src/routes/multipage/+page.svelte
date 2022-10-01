@@ -1,12 +1,7 @@
 <script lang="ts">
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	import { base } from '$app/paths';
-	import workerSrc from 'pdfjs-dist/build/pdf.worker.min.js?url';
-	import { Document, Page, PDFJS, preferThisWidth } from 'svelte-pdfjs';
-
-	if (PDFJS.GlobalWorkerOptions) {
-		PDFJS.GlobalWorkerOptions.workerSrc = workerSrc;
-	}
+	import { Document, Page, preferThisWidth } from 'svelte-pdfjs';
 
 	let max_pages: number = 0;
 </script>

@@ -1,6 +1,7 @@
 <script lang="ts">
+	import { RenderingCancelledException } from 'pdfjs-dist';
 	import type { PDFPageProxy, RenderTask } from 'pdfjs-dist';
-	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
+	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils.js';
 	import { tick } from 'svelte';
 	import TextLayer from './TextLayer.svelte';
 
@@ -12,15 +13,22 @@
 
 	let render_task: RenderTask;
 
-	function render_page() {
-		if (render_task?._internalRenderTask.running) render_task.cancel();
+	async function render_page() {
+		render_task?.cancel();
+		await tick();
 		render_task = page.render({
 			canvasContext: canvas.getContext('2d'),
 			viewport,
 		});
+
+		try {
+			await render_task.promise;
+		} catch (err) {
+			if (!(err instanceof RenderingCancelledException)) throw err;
+		}
 	}
 
-	$: if (viewport && canvas) tick().then(render_page);
+	$: if (viewport && canvas) render_page();
 </script>
 
 <div>

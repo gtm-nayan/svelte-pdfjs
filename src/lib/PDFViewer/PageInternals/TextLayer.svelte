@@ -1,12 +1,11 @@
 <script lang="ts">
 	import * as PDFJS from 'pdfjs-dist';
-	import type { PDFPageProxy } from 'pdfjs-dist/types/src/display/api';
-	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
+	import type { PDFPageProxy, TextLayerRenderTask, PageViewport } from 'pdfjs-dist';
 
 	export let page: PDFPageProxy;
 	export let viewport: PageViewport;
 
-	let render_task: ReturnType<typeof PDFJS.renderTextLayer>;
+	let render_task: TextLayerRenderTask;
 	let container: HTMLDivElement;
 
 	function render_text_layer() {

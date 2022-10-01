@@ -2,35 +2,35 @@
 	"name": "svelte-pdfjs",
 	"version": "0.3.15",
 	"scripts": {
-		"dev": "svelte-kit dev",
-		"build": "svelte-kit build",
-		"preview": "svelte-kit preview",
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --ignore-path .prettierignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
 		"format": "prettier --ignore-path .prettierignore --write --plugin-search-dir=. .",
-		"package": "svelte-kit package"
+		"package": "svelte-package && node scripts/package.js"
 	},
 	"devDependencies": {
-		"@changesets/cli": "^2.21.1",
-		"@sveltejs/adapter-static": "^1.0.0-next.29",
-		"@sveltejs/kit": "next",
-		"@typescript-eslint/eslint-plugin": "^5.15.0",
-		"@typescript-eslint/parser": "^5.15.0",
-		"eslint": "^8.11.0",
+		"@changesets/cli": "^2.24.4",
+		"@sveltejs/adapter-static": "1.0.0-next.43",
+		"@sveltejs/kit": "1.0.0-next.506",
+		"@sveltejs/package": "1.0.0-next.5",
+		"@typescript-eslint/eslint-plugin": "^5.38.1",
+		"@typescript-eslint/parser": "^5.38.1",
+		"eslint": "^8.24.0",
 		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-svelte3": "^3.4.1",
-		"prettier": "^2.6.0",
-		"prettier-plugin-svelte": "^2.6.0",
+		"eslint-plugin-svelte3": "^4.0.0",
+		"pdfjs-dist": "^2.16.105",
+		"prettier": "^2.7.1",
+		"prettier-plugin-svelte": "^2.7.1",
 		"svelte": "^3.46.4",
-		"svelte-check": "^2.4.6",
-		"svelte-preprocess": "^4.10.4",
-		"svelte2tsx": "^0.5.6",
-		"tslib": "^2.3.1",
-		"typescript": "^4.6.2"
-	},
-	"dependencies": {
-		"pdfjs-dist": "^2.13.216"
+		"svelte-check": "^2.9.1",
+		"svelte-preprocess": "^4.10.7",
+		"svelte2tsx": "^0.5.19",
+		"tslib": "^2.4.0",
+		"typescript": "^4.8.4",
+		"vite": "^3.1.4"
 	},
 	"engines": {
 		"node": ">=16.0.0"

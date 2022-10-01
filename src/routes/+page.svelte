@@ -1,15 +1,8 @@
 <script lang="ts">
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	import { base } from '$app/paths';
-	import workerSrc from 'pdfjs-dist/build/pdf.worker.min.js?url';
-	import { Document, Page, PDFJS, preferThisHeight, type MultipleOf90 } from 'svelte-pdfjs';
 
-	if (PDFJS.GlobalWorkerOptions) {
-		// A CDN-hosted worker is already available by default
-		// but you can specify a custom worker script URL.
-		// Also see https://vitejs.dev/guide/assets.html#explicit-url-imports
-		PDFJS.GlobalWorkerOptions.workerSrc = workerSrc;
-	}
+	import { Document, Page, preferThisHeight, type MultipleOf90 } from 'svelte-pdfjs';
 
 	let scale = 1;
 	let num = 1;
