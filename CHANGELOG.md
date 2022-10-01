@@ -1,5 +1,12 @@
 # svelte-pdfjs
 
+## 0.4.0
+
+### Minor Changes
+
+- a9ef4d6: [breaking] make pdfjs-dist a peer dep, add setWorkerSrc
+
+
 ## 0.4.0-rc.0
 
 ### Minor Changes

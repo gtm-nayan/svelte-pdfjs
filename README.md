@@ -3,19 +3,19 @@
 A wrapper around Mozilla's PDFJS renderer. Only cares about loading and showing the PDF and nothing else, all the fancy stuff such as styling the viewer is left up to the consumer. Still in early stages so feel free to create an issue or a PR for any bugs that you find, any improvements or feature requests.
 
 ## Usage
-
-See [src/routes/index.svelte](src/routes/index.svelte)  
+See [src/routes/+page.svelte](src/routes/+page.svelte)  
 [Demo](https://gtm-nayan.github.io/svelte-pdfjs)
 
-## SvelteKit
+## Custom worker source
+You can provide a custom worker URL using `setWorkerSrc`, see [src/routes/+layout.ts](src/routes/+layout.ts)
 
-It's compatible with SvelteKit, just import the component and use it in a `{#if browser}` you'll have to install pdfjs-dist as a dependency.
+## SSR
+For now this package cannot be used with SSR, contributions to improve in that area are more than welcome. Because of how pdfjs-dist is packaged, there is an eval which prevents bundlers from properly minifying whatever chunk it ends up in. To get around it, you can patch your installation of pdfjs-dist such that all instances of `_is_node.isNodeJs` are replaced with `false` since those parts aren't going to be used anyway.
 
 ## TODOs:
 
 - [x] Text layer rendering
 - [x] SvelteKit compatibility
-- [ ] Think of a better name for the `zoomLevel` prop on `Page`
 - [ ] SVG renderer
 - [ ] Annotation layer
 - [ ] Error handling
