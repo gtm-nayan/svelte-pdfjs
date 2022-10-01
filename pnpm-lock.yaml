@@ -1,5 +1,10 @@
 lockfileVersion: 5.4
 
+patchedDependencies:
+  pdfjs-dist@2.16.105:
+    hash: q3ppivfa7sz5obxvnqiaapwvci
+    path: patches/pdfjs-dist@2.16.105.patch
+
 specifiers:
   '@changesets/cli': ^2.24.4
   '@sveltejs/adapter-static': 1.0.0-next.43
@@ -31,7 +36,7 @@ devDependencies:
   eslint: 8.24.0
   eslint-config-prettier: 8.5.0_eslint@8.24.0
   eslint-plugin-svelte3: 4.0.0_au3pepe3pg762i4qc6elfi5xzy
-  pdfjs-dist: 2.16.105
+  pdfjs-dist: 2.16.105_q3ppivfa7sz5obxvnqiaapwvci
   prettier: 2.7.1
   prettier-plugin-svelte: 2.7.1_6pyesgyaifww56geolqo3ss3zy
   svelte: 3.46.4
@@ -2317,7 +2322,7 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /pdfjs-dist/2.16.105:
+  /pdfjs-dist/2.16.105_q3ppivfa7sz5obxvnqiaapwvci:
     resolution: {integrity: sha512-J4dn41spsAwUxCpEoVf6GVoz908IAA3mYiLmNxg8J9kfRXc2jxpbUepcP0ocp0alVNLFthTAM8DZ1RaHh8sU0A==}
     peerDependencies:
       worker-loader: ^3.0.8
@@ -2328,6 +2333,7 @@ packages:
       dommatrix: 1.0.3
       web-streams-polyfill: 3.2.1
     dev: true
+    patched: true
 
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}

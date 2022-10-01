@@ -1,0 +1,261 @@
+diff --git a/build/pdf.js b/build/pdf.js
+index 63248c598d49b3cac288222892afc6eac38b4941..e236ebe3e57e3637c35f4e678f5ea1ece905d5bb 100644
+--- a/build/pdf.js
++++ b/build/pdf.js
+@@ -1090,7 +1090,7 @@ var _is_node = __w_pdfjs_require__(3);
+ /***/ }),
+ /* 3 */
+ /***/ ((__unused_webpack_module, exports) => {
+-
++return;
+ 
+ 
+ Object.defineProperty(exports, "__esModule", ({
+@@ -1147,7 +1147,7 @@ exports.DefaultCMapReaderFactory = DefaultCMapReaderFactory;
+ let DefaultStandardFontDataFactory = _display_utils.DOMStandardFontDataFactory;
+ exports.DefaultStandardFontDataFactory = DefaultStandardFontDataFactory;
+ 
+-if (_is_node.isNodeJS) {
++if (false) {
+   const {
+     NodeCanvasFactory,
+     NodeCMapReaderFactory,
+@@ -1225,7 +1225,7 @@ function getDocument(src) {
+         continue;
+ 
+       case "data":
+-        if (_is_node.isNodeJS && typeof Buffer !== "undefined" && value instanceof Buffer) {
++        if (false && typeof Buffer !== "undefined" && value instanceof Buffer) {
+           params[key] = new Uint8Array(value);
+         } else if (value instanceof Uint8Array) {
+           break;
+@@ -1281,11 +1281,11 @@ function getDocument(src) {
+   }
+ 
+   if (typeof params.disableFontFace !== "boolean") {
+-    params.disableFontFace = _is_node.isNodeJS;
++    params.disableFontFace = false;
+   }
+ 
+   if (typeof params.useSystemFonts !== "boolean") {
+-    params.useSystemFonts = !_is_node.isNodeJS && !params.disableFontFace;
++    params.useSystemFonts = !false && !params.disableFontFace;
+   }
+ 
+   if (typeof params.ownerDocument !== "object" || params.ownerDocument === null) {
+@@ -2303,7 +2303,7 @@ const PDFWorkerUtil = {
+ };
+ exports.PDFWorkerUtil = PDFWorkerUtil;
+ {
+-  if (_is_node.isNodeJS && typeof require === "function") {
++  if (false && typeof require === "function") {
+     PDFWorkerUtil.isWorkerDisabled = true;
+     PDFWorkerUtil.fallbackWorkerSrc = "./pdf.worker.js";
+   } else if (typeof document === "object") {
+@@ -2545,7 +2545,7 @@ class PDFWorker {
+     }
+ 
+     if (PDFWorkerUtil.fallbackWorkerSrc !== null) {
+-      if (!_is_node.isNodeJS) {
++      if (!false) {
+         (0, _display_utils.deprecated)('No "GlobalWorkerOptions.workerSrc" specified.');
+       }
+ 
+@@ -2571,7 +2571,7 @@ class PDFWorker {
+         return mainWorkerMessageHandler;
+       }
+ 
+-      if (_is_node.isNodeJS && typeof require === "function") {
++      if (false && typeof require === "function") {
+         const worker = eval("require")(this.workerSrc);
+         return worker.WorkerMessageHandler;
+       }
+@@ -3726,7 +3726,7 @@ exports.PrintAnnotationStorage = PrintAnnotationStorage;
+ /***/ }),
+ /* 6 */
+ /***/ ((__unused_webpack_module, exports, __w_pdfjs_require__) => {
+-
++return;
+ 
+ 
+ Object.defineProperty(exports, "__esModule", ({
+@@ -4059,7 +4059,7 @@ exports.AnnotationEditor = AnnotationEditor;
+ /***/ }),
+ /* 7 */
+ /***/ ((__unused_webpack_module, exports, __w_pdfjs_require__) => {
+-
++return;
+ 
+ 
+ Object.defineProperty(exports, "__esModule", ({
+@@ -4965,7 +4965,7 @@ class DOMStandardFontDataFactory extends _base_factory.BaseStandardFontDataFacto
+ 
+ exports.DOMStandardFontDataFactory = DOMStandardFontDataFactory;
+ 
+-class DOMSVGFactory extends _base_factory.BaseSVGFactory {
++if (false){class DOMSVGFactory extends _base_factory.BaseSVGFactory {
+   _createSVG(type) {
+     return document.createElementNS(SVG_NS, type);
+   }
+@@ -4973,7 +4973,7 @@ class DOMSVGFactory extends _base_factory.BaseSVGFactory {
+ }
+ 
+ exports.DOMSVGFactory = DOMSVGFactory;
+-
++}
+ class PageViewport {
+   constructor({
+     viewBox,
+@@ -5500,7 +5500,7 @@ class BaseStandardFontDataFactory {
+ }
+ 
+ exports.BaseStandardFontDataFactory = BaseStandardFontDataFactory;
+-
++return;
+ class BaseSVGFactory {
+   constructor() {
+     if (this.constructor === BaseSVGFactory) {
+@@ -6106,7 +6106,7 @@ const MAX_FONT_SIZE = 100;
+ const MAX_GROUP_SIZE = 4096;
+ const EXECUTION_TIME = 15;
+ const EXECUTION_STEPS = 10;
+-const MAX_SIZE_TO_COMPILE = _is_node.isNodeJS && typeof Path2D === "undefined" ? -1 : 1000;
++const MAX_SIZE_TO_COMPILE = false && typeof Path2D === "undefined" ? -1 : 1000;
+ const FULL_CHUNK_HEIGHT = 16;
+ 
+ function mirrorContextOperations(ctx, destCtx) {
+@@ -8900,7 +8900,7 @@ const PathType = {
+ exports.PathType = PathType;
+ 
+ function applyBoundingBox(ctx, bbox) {
+-  if (!bbox || _is_node.isNodeJS) {
++  if (!bbox || false) {
+     return;
+   }
+ 
+@@ -9499,7 +9499,7 @@ function applyMaskImageData({
+ /***/ }),
+ /* 15 */
+ /***/ ((__unused_webpack_module, exports) => {
+-
++return;
+ 
+ 
+ Object.defineProperty(exports, "__esModule", ({
+@@ -10727,7 +10727,7 @@ exports.XfaText = XfaText;
+ /***/ }),
+ /* 21 */
+ /***/ ((__unused_webpack_module, exports, __w_pdfjs_require__) => {
+-
++return;
+ 
+ 
+ Object.defineProperty(exports, "__esModule", ({
+@@ -10791,7 +10791,7 @@ exports.NodeStandardFontDataFactory = NodeStandardFontDataFactory;
+ /***/ }),
+ /* 22 */
+ /***/ ((__unused_webpack_module, exports, __w_pdfjs_require__) => {
+-
++return;
+ 
+ 
+ Object.defineProperty(exports, "__esModule", ({
+@@ -11242,7 +11242,7 @@ exports.AnnotationEditorLayer = AnnotationEditorLayer;
+ /***/ }),
+ /* 23 */
+ /***/ ((__unused_webpack_module, exports, __w_pdfjs_require__) => {
+-
++return;
+ 
+ 
+ Object.defineProperty(exports, "__esModule", ({
+@@ -11612,7 +11612,7 @@ exports.FreeTextEditor = FreeTextEditor;
+ /***/ }),
+ /* 24 */
+ /***/ ((__unused_webpack_module, exports, __w_pdfjs_require__) => {
+-
++return;
+ 
+ 
+ Object.defineProperty(exports, "__esModule", ({
+@@ -12414,7 +12414,7 @@ exports.InkEditor = InkEditor;
+ /***/ }),
+ /* 25 */
+ /***/ ((__unused_webpack_module, exports, __w_pdfjs_require__) => {
+-
++return;
+ 
+ 
+ Object.defineProperty(exports, "__esModule", ({
+@@ -12429,7 +12429,7 @@ exports.fitCurve = fitCurve;
+ /***/ }),
+ /* 26 */
+ /***/ ((module) => {
+-
++return;
+ 
+ 
+ function fitCurve(points, maxError, progressCallback) {
+@@ -12792,7 +12792,7 @@ module.exports.createTangent = createTangent;
+ /***/ }),
+ /* 27 */
+ /***/ ((__unused_webpack_module, exports, __w_pdfjs_require__) => {
+-
++return;
+ 
+ 
+ Object.defineProperty(exports, "__esModule", ({
+@@ -15222,7 +15222,7 @@ exports.AnnotationLayer = AnnotationLayer;
+ /***/ }),
+ /* 28 */
+ /***/ ((__unused_webpack_module, exports) => {
+-
++return;
+ 
+ 
+ Object.defineProperty(exports, "__esModule", ({
+@@ -15291,7 +15291,7 @@ exports.ColorConverters = ColorConverters;
+ /***/ }),
+ /* 29 */
+ /***/ ((__unused_webpack_module, exports, __w_pdfjs_require__) => {
+-
++return;
+ 
+ 
+ Object.defineProperty(exports, "__esModule", ({
+@@ -16347,7 +16347,7 @@ function renderTextLayer(renderParameters) {
+ /***/ }),
+ /* 31 */
+ /***/ ((__unused_webpack_module, exports, __w_pdfjs_require__) => {
+-
++return;
+ 
+ 
+ Object.defineProperty(exports, "__esModule", ({
+@@ -16469,7 +16469,7 @@ exports.SVGGraphics = SVGGraphics;
+     }
+ 
+     function deflateSync(literals) {
+-      if (!_is_node.isNodeJS) {
++      if (!false) {
+         return deflateSyncUncompressed(literals);
+       }
+ 
+@@ -17903,7 +17903,7 @@ exports.SVGGraphics = SVGGraphics;
+ /***/ }),
+ /* 32 */
+ /***/ ((__unused_webpack_module, exports, __w_pdfjs_require__) => {
+-
++return;
+ 
+ 
+ Object.defineProperty(exports, "__esModule", ({
+@@ -19738,7 +19738,7 @@ var _xfa_layer = __w_pdfjs_require__(29);
+ const pdfjsVersion = '2.16.105';
+ const pdfjsBuild = '172ccdbe5';
+ {
+-  if (_is_node.isNodeJS) {
++  if (false) {
+     const {
+       PDFNodeStream
+     } = __w_pdfjs_require__(32);

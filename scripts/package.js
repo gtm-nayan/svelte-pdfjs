@@ -14,6 +14,7 @@ for (const key of ['svelte', 'pdfjs-dist']) {
 }
 
 delete pkg['devDependencies'];
+delete pkg['pnpm'];
 
 const final_pkg = JSON.stringify(pkg, null, '\t');
 

@@ -2,8 +2,7 @@ name: build
 
 on:
   push:
-    branches:
-      'main'
+    branches: 'main'
 
 jobs:
   publish_docs:
@@ -20,25 +19,25 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-
-      
+
       - name: pnpm
         uses: pnpm/action-setup@v2.1.0
         with:
           version: 6
-      
+
       - name: setup node
         run: pnpm env use --global 16
-      
+
       - name: Install deps
         run: pnpm i
-      
+
       - name: build
         env:
-          BASE_PATH: "/svelte-pdfjs"
+          BASE_PATH: '/svelte-pdfjs'
         run: |
           pnpm build
           touch build/.nojekyll
-      
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
