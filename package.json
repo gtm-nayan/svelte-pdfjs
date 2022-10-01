@@ -21,7 +21,7 @@
 		"eslint": "^8.24.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^4.0.0",
-		"pdfjs-dist": "^2.16.105",
+		"pdfjs-dist": "2.16.105",
 		"prettier": "^2.7.1",
 		"prettier-plugin-svelte": "^2.7.1",
 		"svelte": "^3.46.4",
@@ -49,5 +49,10 @@
 	},
 	"bugs": {
 		"url": "https://github.com/gtm-nayan/svelte-pdfjs/issues"
+	},
+	"pnpm": {
+		"patchedDependencies": {
+			"pdfjs-dist@2.16.105": "patches/pdfjs-dist@2.16.105.patch"
+		}
 	}
 }

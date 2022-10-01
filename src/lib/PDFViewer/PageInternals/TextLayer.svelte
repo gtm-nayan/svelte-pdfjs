@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as PDFJS from 'pdfjs-dist';
-	import type { PDFPageProxy, TextLayerRenderTask, PageViewport } from 'pdfjs-dist';
+	import type { PageViewport, PDFPageProxy, TextLayerRenderTask } from 'pdfjs-dist';
+	import { renderTextLayer } from 'pdfjs-dist';
 
 	export let page: PDFPageProxy;
 	export let viewport: PageViewport;
@@ -11,7 +11,7 @@
 	function render_text_layer() {
 		render_task?.cancel();
 		while (container.firstChild) container.firstChild.remove();
-		render_task = PDFJS.renderTextLayer({
+		render_task = renderTextLayer({
 			container,
 			textContentStream: page.streamTextContent(),
 			viewport,

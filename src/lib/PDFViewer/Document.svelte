@@ -3,18 +3,14 @@ Renderless component responsible for just loading the document and providing it 
 children Page components through the context API.
  -->
 <script lang="ts" context="module">
-	import * as PDFJS from 'pdfjs-dist';
+	import { getDocument } from 'pdfjs-dist';
+	import type { PDFDocumentLoadingTask, PDFDocumentProxy, PDFWorker } from 'pdfjs-dist';
 	import type {
 		DocumentInitParameters,
 		OnProgressParameters,
-		PDFDocumentLoadingTask,
-		PDFDocumentProxy,
 	} from 'pdfjs-dist/types/src/display/api.js';
-	import { createEventDispatcher, onDestroy, setContext } from 'svelte';
-	import { PDFWorker } from '../utils/worker.js';
+	import { createEventDispatcher, getContext, onDestroy, setContext } from 'svelte';
 	import { writable } from 'svelte/store';
-
-	export const key = Symbol.for('current_doc');
 </script>
 
 <script lang="ts">
@@ -39,9 +35,11 @@ children Page components through the context API.
 	 */
 	export let onProgress: undefined | ((params: OnProgressParameters) => void) = undefined;
 
+	const worker = getContext<PDFWorker | undefined>('svelte_pdfjs_worker');
+
 	let current_doc = writable<PDFDocumentProxy | null>();
 	let loading_task: PDFDocumentLoadingTask;
-	setContext(key, current_doc);
+	setContext('svelte_pdfjs_doc', current_doc);
 
 	onDestroy(() => {
 		$current_doc?.destroy();
@@ -53,7 +51,7 @@ children Page components through the context API.
 
 		current_doc.set(null);
 
-		loading_task = PDFJS.getDocument({ url: file, worker: $PDFWorker, ...loadOptions });
+		loading_task = getDocument({ url: file, worker, ...loadOptions });
 		loading_task.onProgress = onProgress!;
 		loading_task.promise
 			.then(
