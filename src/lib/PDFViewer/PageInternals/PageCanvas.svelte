@@ -17,7 +17,7 @@
 		render_task?.cancel();
 		await tick();
 		render_task = page.render({
-			canvasContext: canvas.getContext('2d'),
+			canvasContext: canvas.getContext('2d')!,
 			viewport,
 		});
 

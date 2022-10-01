@@ -13,7 +13,8 @@ const config = {
 		}),
 
 		alias: {
-			'svelte-pdfjs': 'src/lib',
+			'svelte-pdfjs': 'src/lib/index.js',
+			'svelte-pdfjs/*': 'src/lib/*',
 		},
 
 		paths: {

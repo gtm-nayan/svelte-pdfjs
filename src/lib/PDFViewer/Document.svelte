@@ -9,9 +9,9 @@ children Page components through the context API.
 		OnProgressParameters,
 		PDFDocumentLoadingTask,
 		PDFDocumentProxy,
-	} from 'pdfjs-dist/types/src/display/api';
+	} from 'pdfjs-dist/types/src/display/api.js';
 	import { createEventDispatcher, onDestroy, setContext } from 'svelte';
-	import { PDFWorker } from 'svelte-pdfjs/utils/worker';
+	import { PDFWorker } from '../utils/worker.js';
 	import { writable } from 'svelte/store';
 
 	export const key = Symbol.for('current_doc');
@@ -28,18 +28,18 @@ children Page components through the context API.
 	}
 
 	/** The URL of the file to load. */
-	export let file: string | URL = undefined;
+	export let file: string | URL | undefined = undefined;
 	/**
 	 * Extra options provided to PDFJS.getDocument.
 	 * @see https://github.com/mozilla/pdf.js/blob/41dab8e7b6c1e2684d4afabb8f02e40a874d8e85/src/display/api.js#L126
 	 */
-	export let loadOptions: DocumentInitParameters = undefined;
+	export let loadOptions: DocumentInitParameters | undefined = undefined;
 	/**
 	 * Callback that fires everytime a part of the PDF is downloaded. Can be useful for showing a progress bar.
 	 */
-	export let onProgress: (params: OnProgressParameters) => void = undefined;
+	export let onProgress: undefined | ((params: OnProgressParameters) => void) = undefined;
 
-	let current_doc = writable<PDFDocumentProxy>();
+	let current_doc = writable<PDFDocumentProxy | null>();
 	let loading_task: PDFDocumentLoadingTask;
 	setContext(key, current_doc);
 
@@ -54,7 +54,7 @@ children Page components through the context API.
 		current_doc.set(null);
 
 		loading_task = PDFJS.getDocument({ url: file, worker: $PDFWorker, ...loadOptions });
-		loading_task.onProgress = onProgress;
+		loading_task.onProgress = onProgress!;
 		loading_task.promise
 			.then(
 				(doc) => {

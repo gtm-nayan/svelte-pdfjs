@@ -1,5 +1,5 @@
 import type { PDFPageProxy } from 'pdfjs-dist';
-import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils';
+import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils.js';
 
 export type MultipleOf90 = 0 | 90 | 180 | 270;
 export type CalcViewport = (page: PDFPageProxy, rotation: MultipleOf90) => PageViewport;

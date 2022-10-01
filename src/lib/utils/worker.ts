@@ -11,7 +11,7 @@ export function set_worker_src(url: string) {
 	worker_src = url;
 }
 
-export const PDFWorker = readable<PDFJS.PDFWorker>(null, (set) => {
+export const PDFWorker = readable<PDFJS.PDFWorker>(undefined, (set) => {
 	gw_opts.workerSrc = worker_src;
 	const worker = new PDFJS.PDFWorker();
 	gw_opts.workerSrc = orig_src;
