@@ -1,6 +1,6 @@
 {
 	"name": "svelte-pdfjs",
-	"version": "0.5.0-rc.0",
+	"version": "0.5.0",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",

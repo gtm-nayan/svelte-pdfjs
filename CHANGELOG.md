@@ -1,5 +1,11 @@
 # svelte-pdfjs
 
+## 0.5.0
+
+### Minor Changes
+
+- 70618d1: [breaking] change api for supplying worker
+
 ## 0.5.0-rc.0
 
 ### Minor Changes
