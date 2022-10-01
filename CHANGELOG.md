@@ -1,5 +1,11 @@
 # svelte-pdfjs
 
+## 0.4.0-rc.0
+
+### Minor Changes
+
+- [breaking] make pdfjs-dist a peer dep
+
 ## 0.3.15
 
 ### Patch Changes
