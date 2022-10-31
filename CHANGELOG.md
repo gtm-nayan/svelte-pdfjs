@@ -1,5 +1,11 @@
 # svelte-pdfjs
 
+## 0.6.0
+
+### Minor Changes
+
+- update to pdf.js v3
+
 ## 0.5.0
 
 ### Minor Changes

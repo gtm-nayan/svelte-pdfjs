@@ -1,9 +1,9 @@
-import { writeFile, readFile } from 'node:fs/promises';
+import { writeFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const pkg_file_path = fileURLToPath(new URL('../package/package.json', import.meta.url));
 
-const pkg = JSON.parse(await readFile(pkg_file_path));
+const pkg = JSON.parse(readFileSync(pkg_file_path));
 
 const dev_deps = pkg['devDependencies'];
 
@@ -18,4 +18,4 @@ delete pkg['pnpm'];
 
 const final_pkg = JSON.stringify(pkg, null, '\t');
 
-await writeFile(pkg_file_path, final_pkg);
+writeFileSync(pkg_file_path, final_pkg);
