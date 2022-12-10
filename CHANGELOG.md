@@ -1,5 +1,11 @@
 # svelte-pdfjs
 
+## 0.6.1
+
+### Patch Changes
+
+- fix: use URL constructor for worker src
+
 ## 0.6.0
 
 ### Minor Changes
