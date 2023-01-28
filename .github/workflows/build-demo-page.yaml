@@ -1,11 +1,11 @@
-name: build
+name: build-demo-page
 
 on:
   push:
     branches: 'main'
 
 jobs:
-  publish_docs:
+  build_demo:
     runs-on: ubuntu-latest
     if: github.repository == 'gtm-nayan/svelte-pdfjs'
     steps:
