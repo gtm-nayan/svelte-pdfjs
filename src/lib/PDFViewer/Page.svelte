@@ -74,5 +74,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 		{page}
 		{viewport}
 		render_text_layer={renderer === 'canvas' ? renderTextLayer : false}
+		on:pageloadsuccess
+		on:pageloaderror
 	/>
 {/await}
