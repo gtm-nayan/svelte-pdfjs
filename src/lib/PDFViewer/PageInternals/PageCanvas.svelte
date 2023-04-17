@@ -7,7 +7,10 @@
 </script>
 
 <script lang="ts">
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{
+		pagerendersuccess: PDFPageProxy;
+		pagerendererror: unknown;
+	}>();
 
 	export let page: PDFPageProxy;
 	export let viewport: PageViewport;
