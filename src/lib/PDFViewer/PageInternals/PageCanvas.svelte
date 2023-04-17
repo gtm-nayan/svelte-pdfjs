@@ -12,7 +12,7 @@
 	export let page: PDFPageProxy;
 	export let viewport: PageViewport;
 	export let render_text_layer: boolean;
-	export let style: string;
+	export let canvasStyles: string;
 
 	let canvas: HTMLCanvasElement;
 
