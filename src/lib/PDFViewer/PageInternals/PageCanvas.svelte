@@ -30,8 +30,10 @@
 			await render_task.promise;
 			dispatch('pageloadsuccess', page);
 		} catch (err) {
-			dispatch('pageloaderror', err);
-			if (!(err instanceof RenderingCancelledException)) throw err;
+			if (!(err instanceof RenderingCancelledException)) {
+				dispatch('pageloaderror', err);
+				throw err;
+			}
 		}
 	}
 
