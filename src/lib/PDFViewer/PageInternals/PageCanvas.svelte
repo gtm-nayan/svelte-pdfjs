@@ -12,7 +12,7 @@
 	export let page: PDFPageProxy;
 	export let viewport: PageViewport;
 	export let render_text_layer: boolean;
-	export let canvasStyles: string;
+	export let canvasStyles = '';
 
 	let canvas: HTMLCanvasElement;
 
@@ -28,10 +28,10 @@
 
 		try {
 			await render_task.promise;
-			dispatch('pageloadsuccess', page);
+			dispatch('pagerendersuccess', page);
 		} catch (err) {
 			if (!(err instanceof RenderingCancelledException)) {
-				dispatch('pageloaderror', err);
+				dispatch('pagerendererror', err);
 				throw err;
 			}
 		}
@@ -45,7 +45,7 @@
 		bind:this={canvas}
 		width={viewport?.width}
 		height={viewport?.height}
-		{style}
+		style={canvasStyles}
 	/>{#if render_text_layer}
 		<TextLayer {page} {viewport} />
 	{/if}
