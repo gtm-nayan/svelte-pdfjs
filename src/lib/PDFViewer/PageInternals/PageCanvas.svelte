@@ -1,13 +1,21 @@
-<script lang="ts">
+<script lang="ts" context="module">
 	import { RenderingCancelledException } from 'pdfjs-dist';
 	import type { PDFPageProxy, RenderTask } from 'pdfjs-dist';
 	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils.js';
-	import { tick } from 'svelte';
+	import { createEventDispatcher, tick } from 'svelte';
 	import TextLayer from './TextLayer.svelte';
+</script>
+
+<script lang="ts">
+	const dispatch = createEventDispatcher<{
+		pagerendersuccess: PDFPageProxy;
+		pagerendererror: unknown;
+	}>();
 
 	export let page: PDFPageProxy;
 	export let viewport: PageViewport;
 	export let render_text_layer: boolean;
+	export let canvasStyles = '';
 
 	let canvas: HTMLCanvasElement;
 
@@ -23,8 +31,12 @@
 
 		try {
 			await render_task.promise;
+			dispatch('pagerendersuccess', page);
 		} catch (err) {
-			if (!(err instanceof RenderingCancelledException)) throw err;
+			if (!(err instanceof RenderingCancelledException)) {
+				dispatch('pagerendererror', err);
+				throw err;
+			}
 		}
 	}
 
@@ -36,6 +48,7 @@
 		bind:this={canvas}
 		width={viewport?.width}
 		height={viewport?.height}
+		style={canvasStyles}
 	/>{#if render_text_layer}
 		<TextLayer {page} {viewport} />
 	{/if}

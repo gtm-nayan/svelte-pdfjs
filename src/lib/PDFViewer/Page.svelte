@@ -51,6 +51,11 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	export let getViewport: CalcViewport | undefined = undefined;
 	// #endregion props
 
+	interface $$Events {
+		pagerendersuccess: CustomEvent<PDFPageProxy>;
+		pagerendererror: CustomEvent<unknown>;
+	}
+
 	onDestroy(() => page?.cleanup());
 
 	const current_doc: Writable<PDFDocumentProxy> = getContext('svelte_pdfjs_doc');
@@ -74,5 +79,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 		{page}
 		{viewport}
 		render_text_layer={renderer === 'canvas' ? renderTextLayer : false}
+		on:pagerendersuccess
+		on:pagerendererror
 	/>
 {/await}

@@ -1,5 +1,11 @@
 # svelte-pdfjs
 
+## 0.6.2
+
+### Patch Changes
+
+- feat: add pagerendersuccess and pagerendererror events to Page and PageCanvas
+
 ## 0.6.1
 
 ### Patch Changes
