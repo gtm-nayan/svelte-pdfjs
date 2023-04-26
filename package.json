@@ -48,5 +48,10 @@
 	},
 	"bugs": {
 		"url": "https://github.com/gtm-nayan/svelte-pdfjs/issues"
+	},
+	"pnpm": {
+		"overrides": {
+			"pdfjs-dist": "link:../pdf.js/build/dist"
+		}
 	}
 }
