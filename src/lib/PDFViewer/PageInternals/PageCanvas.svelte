@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
-	import { RenderingCancelledException } from 'pdfjs-dist';
-	import type { PDFPageProxy, RenderTask } from 'pdfjs-dist';
-	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils.js';
+	import { RenderingCancelledException } from '@gtmnayan/pdfjs-dist-esm';
+	import type { PDFPageProxy, RenderTask } from '@gtmnayan/pdfjs-dist-esm';
+	import type { PageViewport } from '@gtmnayan/pdfjs-dist-esm/types/src/display/display_utils.js';
 	import { createEventDispatcher, tick } from 'svelte';
 	import TextLayer from './TextLayer.svelte';
 </script>

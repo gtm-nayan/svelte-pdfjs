@@ -13,6 +13,7 @@
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.25.2",
+		"@gtmnayan/pdfjs-dist-esm": "^3.6.123",
 		"@sveltejs/adapter-static": "^1.0.0-next.43",
 		"@sveltejs/kit": "1.0.0-next.581",
 		"@sveltejs/package": "^1.0.0-next.5",
@@ -21,7 +22,6 @@
 		"eslint": "^8.29.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^4.0.0",
-		"pdfjs-dist": "3.0.279",
 		"prettier": "^2.8.1",
 		"prettier-plugin-svelte": "^2.9.0",
 		"svelte": "^3.54.0",

@@ -10,8 +10,8 @@ Render a page from a PDF document. Must be a child of a `Document` component.
  -->
 <script context="module" lang="ts">
 	import type { CalcViewport, MultipleOf90 } from '$lib/utils/target_dimension.js';
-	import type { PDFDocumentProxy, PDFPageProxy } from 'pdfjs-dist';
-	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils.js';
+	import type { PDFDocumentProxy, PDFPageProxy } from '@gtmnayan/pdfjs-dist-esm';
+	import type { PageViewport } from '@gtmnayan/pdfjs-dist-esm/types/src/display/display_utils.js';
 	import { getContext, onDestroy } from 'svelte';
 	import type { Writable } from 'svelte/store';
 </script>

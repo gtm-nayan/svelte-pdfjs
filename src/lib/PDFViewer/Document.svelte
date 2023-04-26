@@ -3,12 +3,16 @@ Renderless component responsible for just loading the document and providing it 
 children Page components through the context API.
  -->
 <script lang="ts" context="module">
-	import { getDocument } from 'pdfjs-dist';
-	import type { PDFDocumentLoadingTask, PDFDocumentProxy, PDFWorker } from 'pdfjs-dist';
+	import { getDocument } from '@gtmnayan/pdfjs-dist-esm';
+	import type {
+		PDFDocumentLoadingTask,
+		PDFDocumentProxy,
+		PDFWorker,
+	} from '@gtmnayan/pdfjs-dist-esm';
 	import type {
 		DocumentInitParameters,
 		OnProgressParameters,
-	} from 'pdfjs-dist/types/src/display/api.js';
+	} from '@gtmnayan/pdfjs-dist-esm/types/src/display/api.js';
 	import { createEventDispatcher, getContext, onDestroy, setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 </script>
