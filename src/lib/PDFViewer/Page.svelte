@@ -9,77 +9,63 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	when their dependencies change.
  -->
 <script context="module" lang="ts">
-	import type { CalcViewport, MultipleOf90 } from '$lib/utils/target_dimension.js';
-	import type { PDFDocumentProxy, PDFPageProxy } from '@gtmnayan/pdfjs-dist-esm';
-	import type { PageViewport } from '@gtmnayan/pdfjs-dist-esm/types/src/display/display_utils.js';
-	import { getContext, onDestroy } from 'svelte';
+	import '@gtmnayan/pdfjs-dist-esm/web/pdf_viewer.css';
+
+	import type { PDFDocumentProxy } from '@gtmnayan/pdfjs-dist-esm';
+	import { getContext, onMount } from 'svelte';
 	import type { Writable } from 'svelte/store';
+
+	import type { PDFSinglePageViewer } from '@gtmnayan/pdfjs-dist-esm/web/pdf_single_page_viewer.js';
+	import { EventBus } from '@gtmnayan/pdfjs-dist-esm/web/event_utils.js';
+	import { browser } from '$app/environment';
 </script>
 
 <script lang="ts">
-	// #region props
-	/**
-	 * What renderer implementation to use for the page.
-	 * SVG rendering not implemented yet.
-	 * @default {"canvas"}
-	 */
-	export let renderer: 'canvas' | 'svg' = 'canvas';
-	/**
-	 * The page number to show.
-	 */
-	export let num: number;
-	/**
-	 * The scale to show the PDF at.
-	 * @default {1}
-	 */
-	export let scale: number = 1;
-	/**
-	 * Rotate the page by a multiple of 90 degrees.
-	 * @default {0}
-	 */
-	export let rotation: MultipleOf90 = 0;
-	/**
-	 * Render a separate text layer (only for the canvas renderer.)
-	 * @default {false}
-	 */
-	export let renderTextLayer: boolean = false;
-
-	/**
-	 * A callback invoked with the current page used to determine the viewport.
-	 * Use this if you need something more complicated than the default based on scale.
-	 */
-	export let getViewport: CalcViewport | undefined = undefined;
-	// #endregion props
-
-	interface $$Events {
-		pagerendersuccess: CustomEvent<PDFPageProxy>;
-		pagerendererror: CustomEvent<unknown>;
-	}
-
-	onDestroy(() => page?.cleanup());
-
 	const current_doc: Writable<PDFDocumentProxy> = getContext('svelte_pdfjs_doc');
 
-	let page: PDFPageProxy;
-	let viewport: PageViewport;
+	let PDFSinglePageViewer: typeof import('@gtmnayan/pdfjs-dist-esm/web/pdf_single_page_viewer.js');
 
-	/* <========================================================================================> */
+	let container_el: HTMLDivElement;
+	let viewer: PDFSinglePageViewer;
 
-	$: $current_doc?.getPage(num).then((p) => (page = p));
+	let eventBus: EventBus;
 
-	let _get_viewport: CalcViewport;
-	$: _get_viewport = getViewport ?? ((p, r) => p.getViewport({ scale, rotation: r }));
+	export let num: number;
+	export let scale = 1;
+	export let container_styles: string;
+	export let render_text_layer = false;
 
-	$: if (page) viewport = _get_viewport(page, rotation);
+	onMount(() => {
+		(async () => {
+			eventBus = new EventBus();
+			({ PDFSinglePageViewer } = await import(
+				'@gtmnayan/pdfjs-dist-esm/web/pdf_single_page_viewer.js'
+			));
+			viewer = new PDFSinglePageViewer({
+				container: container_el,
+				eventBus,
+			});
+		})();
+
+		return () => {
+			viewer?.cleanup();
+			eventBus?.reset();
+		};
+	});
+
+	$: browser && viewer && viewer.setDocument($current_doc);
+	$: browser && viewer && Reflect.set(viewer, 'currentPageNumber', num);
+	$: browser && viewer && Reflect.set(viewer, 'currentScale', scale);
 </script>
 
-{#await renderer === 'canvas' ? import('./PageInternals/PageCanvas.svelte') : Promise.reject('SVG rendering not implemented yet.') then { default: p }}
-	<svelte:component
-		this={p}
-		{page}
-		{viewport}
-		render_text_layer={renderer === 'canvas' ? renderTextLayer : false}
-		on:pagerendersuccess
-		on:pagerendererror
-	/>
-{/await}
+<div class="container" bind:this={container_el} style={container_styles}>
+	<div class="viewer">
+		<canvas />
+	</div>
+</div>
+
+<style>
+	.container {
+		position: absolute;
+	}
+</style>

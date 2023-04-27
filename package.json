@@ -51,7 +51,7 @@
 	},
 	"pnpm": {
 		"overrides": {
-			"pdfjs-dist": "link:../pdf.js/build/dist"
+			"@gtmnayan/pdfjs-dist-esm": "link:../pdf.js/build/dist"
 		}
 	}
 }

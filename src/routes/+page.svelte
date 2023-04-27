@@ -83,5 +83,10 @@
 	div {
 		display: grid;
 		place-items: center;
+		position: relative;
+	}
+
+	div > :global(.container) {
+		top: 0;
 	}
 </style>
