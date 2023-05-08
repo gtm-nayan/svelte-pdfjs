@@ -3,7 +3,7 @@ Renderless component responsible for just loading the document and providing it 
 children Page components through the context API.
  -->
 <script lang="ts" context="module">
-	import { getDocument } from 'pdfjs-dist';
+	import { browser } from '$app/environment';
 	import type { PDFDocumentLoadingTask, PDFDocumentProxy, PDFWorker } from 'pdfjs-dist';
 	import type {
 		DocumentInitParameters,
@@ -46,11 +46,12 @@ children Page components through the context API.
 		$current_doc?.cleanup(false);
 	});
 
-	function load_document() {
+	async function load_document() {
 		const prev_doc = $current_doc;
 
 		current_doc.set(null);
 
+		const { getDocument } = await import('pdfjs-dist');
 		loading_task = getDocument({ url: file, worker, ...loadOptions });
 		loading_task.onProgress = onProgress!;
 		loading_task.promise
@@ -68,7 +69,7 @@ children Page components through the context API.
 			)
 			.then(current_doc.set);
 	}
-	$: file, loadOptions, load_document();
+	$: if (browser) file, loadOptions, load_document();
 </script>
 
 <slot />

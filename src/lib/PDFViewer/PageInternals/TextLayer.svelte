@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import type { PageViewport, PDFPageProxy, TextLayerRenderTask } from 'pdfjs-dist';
-	import { renderTextLayer } from 'pdfjs-dist';
 
 	export let page: PDFPageProxy;
 	export let viewport: PageViewport;
@@ -8,9 +8,10 @@
 	let render_task: TextLayerRenderTask;
 	let container: HTMLDivElement;
 
-	function render_text_layer() {
+	async function render_text_layer() {
 		render_task?.cancel();
 		while (container.firstChild) container.firstChild.remove();
+		const { renderTextLayer } = await import("pdfjs-dist");
 		render_task = renderTextLayer({
 			container,
 			textContentStream: page.streamTextContent(),
@@ -18,7 +19,7 @@
 		});
 	}
 
-	$: if (container && viewport) render_text_layer();
+	$: if (container && viewport && browser) render_text_layer();
 </script>
 
 <div bind:this={container} />
