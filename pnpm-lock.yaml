@@ -28,6 +28,9 @@ devDependencies:
   eslint-plugin-svelte3:
     specifier: ^4.0.0
     version: 4.0.0(eslint@8.29.0)(svelte@3.54.0)
+  esm-env:
+    specifier: ^1.0.0
+    version: 1.0.0
   pdfjs-dist:
     specifier: 3.0.279
     version: 3.0.279

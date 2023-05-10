@@ -9,9 +9,11 @@ const dev_deps = pkg['devDependencies'];
 
 const peer_deps = (pkg['peerDependencies'] ??= {});
 
-for (const key of ['svelte', 'pdfjs-dist']) {
-	peer_deps[key] = dev_deps[key];
-}
+const deps = pkg['dependencies'] ?? {};
+
+peer_deps['svelte'] = dev_deps['svelte'];
+deps['pdfjs-dist'] = dev_deps['pdfjs-dist'];
+deps['esm-env'] = dev_deps['esm-env'];
 
 delete pkg['devDependencies'];
 delete pkg['pnpm'];
