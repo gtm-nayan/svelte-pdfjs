@@ -14,6 +14,7 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 	import type { PageViewport } from 'pdfjs-dist/types/src/display/display_utils.js';
 	import { getContext, onDestroy } from 'svelte';
 	import type { Writable } from 'svelte/store';
+	import { BROWSER } from 'esm-env';
 </script>
 
 <script lang="ts">
@@ -65,12 +66,12 @@ Render a page from a PDF document. Must be a child of a `Document` component.
 
 	/* <========================================================================================> */
 
-	$: $current_doc?.getPage(num).then((p) => (page = p));
+	$: if (BROWSER) $current_doc?.getPage(num).then((p) => (page = p));
 
 	let _get_viewport: CalcViewport;
 	$: _get_viewport = getViewport ?? ((p, r) => p.getViewport({ scale, rotation: r }));
 
-	$: if (page) viewport = _get_viewport(page, rotation);
+	$: if (BROWSER && page) viewport = _get_viewport(page, rotation);
 </script>
 
 {#await renderer === 'canvas' ? import('./PageInternals/PageCanvas.svelte') : Promise.reject('SVG rendering not implemented yet.') then { default: p }}

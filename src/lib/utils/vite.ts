@@ -1,9 +1,10 @@
-import { PDFWorker } from 'pdfjs-dist';
+import * as pdfjs from 'pdfjs-dist';
 import { onDestroy, setContext } from 'svelte';
+import { BROWSER } from 'esm-env';
 
 export function set_pdfjs_context() {
-	if (!import.meta.env.SSR) {
-		const worker = new PDFWorker({
+	if (BROWSER) {
+		const worker = new pdfjs.PDFWorker({
 			port: new Worker(
 				new URL('pdfjs-dist/build/pdf.worker.min.js', import.meta.url)
 			) as unknown as null,
