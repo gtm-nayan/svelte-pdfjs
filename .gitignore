@@ -3,5 +3,5 @@ node_modules
 /build
 /.svelte-kit
 /package
-./dist
+dist
 vite.config.js-timestamp*
