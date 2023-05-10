@@ -3,7 +3,7 @@ Renderless component responsible for just loading the document and providing it 
 children Page components through the context API.
  -->
 <script lang="ts" context="module">
-	import { browser } from '$app/environment';
+	import { BROWSER } from 'esm-env';
 	import type { PDFDocumentLoadingTask, PDFDocumentProxy, PDFWorker } from 'pdfjs-dist';
 	import type {
 		DocumentInitParameters,
@@ -69,7 +69,7 @@ children Page components through the context API.
 			)
 			.then(current_doc.set);
 	}
-	$: if (browser) file, loadOptions, load_document();
+	$: if (BROWSER) file, loadOptions, load_document();
 </script>
 
 <slot />

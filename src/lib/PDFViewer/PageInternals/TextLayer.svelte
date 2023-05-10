@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
+	import { BROWSER } from 'esm-env';
 	import type { PageViewport, PDFPageProxy, TextLayerRenderTask } from 'pdfjs-dist';
 
 	export let page: PDFPageProxy;
@@ -11,7 +11,7 @@
 	async function render_text_layer() {
 		render_task?.cancel();
 		while (container.firstChild) container.firstChild.remove();
-		const { renderTextLayer } = await import("pdfjs-dist");
+		const { renderTextLayer } = await import('pdfjs-dist');
 		render_task = renderTextLayer({
 			container,
 			textContentStream: page.streamTextContent(),
@@ -19,7 +19,7 @@
 		});
 	}
 
-	$: if (container && viewport && browser) render_text_layer();
+	$: if (BROWSER && container && viewport) render_text_layer();
 </script>
 
 <div bind:this={container} />
