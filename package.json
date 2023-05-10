@@ -1,6 +1,6 @@
 {
 	"name": "svelte-pdfjs",
-	"version": "0.6.2",
+	"version": "0.7.0",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -61,5 +61,9 @@
 	},
 	"peerDependencies": {
 		"svelte": "^3.54.0"
-	}
+	},
+	"files": [
+		"dist",
+		"CHANGELOG.md"
+	]
 }
