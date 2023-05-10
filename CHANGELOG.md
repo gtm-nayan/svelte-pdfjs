@@ -1,5 +1,11 @@
 # svelte-pdfjs
 
+## 0.6.3
+
+### Patch Changes
+
+- feat: only render in ssr
+
 ## 0.6.2
 
 ### Patch Changes
