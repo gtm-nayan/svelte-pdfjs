@@ -8,8 +8,7 @@ const pkg = JSON.parse(readFileSync(pkg_file_path));
 const dev_deps = pkg['devDependencies'];
 
 const peer_deps = (pkg['peerDependencies'] ??= {});
-
-const deps = pkg['dependencies'] ?? {};
+const deps = (pkg['dependencies'] ??= {});
 
 peer_deps['svelte'] = dev_deps['svelte'];
 deps['pdfjs-dist'] = dev_deps['pdfjs-dist'];
