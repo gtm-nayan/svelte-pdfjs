@@ -14,7 +14,7 @@
 		const { renderTextLayer } = await import('pdfjs-dist');
 		render_task = renderTextLayer({
 			container,
-			textContentStream: page.streamTextContent(),
+			textContentSource: page.streamTextContent(),
 			viewport,
 		});
 	}
