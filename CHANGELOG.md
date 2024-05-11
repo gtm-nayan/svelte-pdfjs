@@ -8,6 +8,12 @@
   [breaking] `svelte-pdfjs/utils/vite` is now `svelte-pdfjs/vite`
   document is not loaded on the server side
 
+## 0.6.3
+
+### Patch Changes
+
+- feat: only render in ssr
+
 ## 0.6.2
 
 ### Patch Changes

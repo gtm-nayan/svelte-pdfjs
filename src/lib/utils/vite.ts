@@ -1,6 +1,6 @@
+import { BROWSER } from 'esm-env';
 import * as pdfjs from 'pdfjs-dist';
 import { onDestroy, setContext } from 'svelte';
-import { BROWSER } from 'esm-env';
 
 export function set_pdfjs_context() {
 	if (BROWSER) {
