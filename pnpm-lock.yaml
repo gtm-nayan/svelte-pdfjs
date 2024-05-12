@@ -12,7 +12,7 @@ dependencies:
     specifier: ^3.11.174
     version: 3.11.174
   svelte:
-    specifier: ^4.2.16
+    specifier: ^4
     version: 4.2.16
 
 devDependencies:
