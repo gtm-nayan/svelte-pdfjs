@@ -1,5 +1,11 @@
 # svelte-pdfjs
 
+## 0.8.0
+
+### Minor Changes
+
+- peer dependencies changed to svelte v4, and latest pdfjs-dist v3
+
 ## 0.7.0
 
 ### Minor Changes
@@ -7,7 +13,6 @@
 - 4b2093c: [breaking] add exports field
   [breaking] `svelte-pdfjs/utils/vite` is now `svelte-pdfjs/vite`
   document is not loaded on the server side
-- peer dependencies changed to svelte v4, and latest pdfjs-dist v3
 
 ## 0.6.3
 
