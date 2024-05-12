@@ -9,13 +9,13 @@
 	let container: HTMLDivElement;
 
 	async function render_text_layer() {
-		render_task?.cancel();
-		while (container.firstChild) container.firstChild.remove();
+		container.textContent = '';
 		const { renderTextLayer } = await import('pdfjs-dist');
 
+		render_task?.cancel();
 		render_task = renderTextLayer({
 			container,
-			textContentStream: page.streamTextContent(),
+			textContentSource: page.streamTextContent(),
 			viewport,
 		});
 	}

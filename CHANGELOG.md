@@ -1,5 +1,13 @@
 # svelte-pdfjs
 
+## 0.7.0
+
+### Minor Changes
+
+- 4b2093c: [breaking] add exports field
+  [breaking] `svelte-pdfjs/utils/vite` is now `svelte-pdfjs/vite`
+  document is not loaded on the server side
+
 ## 0.6.3
 
 ### Patch Changes

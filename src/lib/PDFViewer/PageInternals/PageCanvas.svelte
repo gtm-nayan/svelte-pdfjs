@@ -43,13 +43,14 @@
 	$: if (viewport && canvas) render_page();
 </script>
 
-<div>
+<div style:--scale-factor={viewport?.scale ?? null}>
 	<canvas
 		bind:this={canvas}
 		width={viewport?.width}
 		height={viewport?.height}
 		style={canvasStyles}
-	/>{#if render_text_layer}
+	/>
+	{#if render_text_layer}
 		<TextLayer {page} {viewport} />
 	{/if}
 </div>
