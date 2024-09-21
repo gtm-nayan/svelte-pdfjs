@@ -23,7 +23,6 @@
 		"tslib": "^2.6.2",
 		"typescript": "^5.4.5",
 		"vite": "^4.5.3",
-		"pdfjs-dist": "^4.6.82",
 		"svelte": "^4.2.16"
 	},
 	"exports": {
@@ -59,7 +58,7 @@
 		"esm-env": "^1.0.0"
 	},
 	"peerDependencies": {
-		"pdfjs-dist": "^3.11.174",
+		"pdfjs-dist": "^4.6.82",
 		"svelte": "^4"
 	},
 	"files": [
