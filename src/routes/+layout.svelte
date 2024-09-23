@@ -1,4 +1,4 @@
-<script type="module" lang="ts">
+<script lang="ts">
 	import { set_pdfjs_context } from 'svelte-pdfjs/utils/vite.js';
 	
 
