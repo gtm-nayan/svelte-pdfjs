@@ -9,6 +9,6 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
-		"module": "preserve",
+		"moduleResolution": "node16"
 	}
 }
